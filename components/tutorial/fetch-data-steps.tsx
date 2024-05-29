@@ -1,5 +1,5 @@
-import Step from "./Step";
-import Code from "./Code";
+import { Code } from "./code";
+import { Step } from "./step";
 
 const create = `
 create table notes (
@@ -47,7 +47,7 @@ export default function Page() {
 }
 `.trim();
 
-export default function FetchDataSteps() {
+export function FetchDataSteps() {
   return (
     <ol className="flex flex-col gap-6">
       <Step title="Create some tables and insert some data">

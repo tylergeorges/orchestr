@@ -1,8 +1,8 @@
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function AuthButton() {
+export async function AuthButton() {
   const supabase = createClient();
 
   const {

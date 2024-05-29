@@ -1,6 +1,6 @@
-import Step from "./Step";
+import { Step } from "./step";
 
-export default function ConnectSupabaseSteps() {
+export function ConnectSupabaseSteps() {
   return (
     <ol className="flex flex-col gap-6">
       <Step title="Create Supabase project">

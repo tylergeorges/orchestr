@@ -2,28 +2,191 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 200 20% 98%;
-    --btn-background: 200 10% 91%;
-    --btn-background-hover: 200 10% 89%;
-    --foreground: 200 50% 3%;
+@layer components {
+  .horizontal {
+    @apply flex flex-row;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 200 50% 3%;
-      --btn-background: 200 10% 9%;
-      --btn-background-hover: 200 10% 12%;
-      --foreground: 200 20% 96%;
-    }
+  .vertical {
+    @apply flex flex-col;
+  }
+
+  .horizontal.center-v {
+    @apply items-center;
+  }
+
+  .horizontal.center-h {
+    @apply justify-center;
+  }
+
+  .horizontal.center {
+    @apply justify-center items-center;
+  }
+
+  .vertical.center-v {
+    @apply justify-center;
+  }
+
+  .vertical.center-h {
+    @apply items-center;
+  }
+
+  .vertical.center {
+    @apply justify-center items-center;
+  }
+
+  .space-between {
+    @apply justify-between;
+  }
+}
+
+@layer base {
+  :root {
+    --gray-950: 240deg 5.9% 10%;
+    --gray-900: 240deg 5.9% 13%;
+    --gray-800: 240deg 5.9% 19%;
+    --gray-700: 240deg 5.9% 32%;
+    --gray-600: 240deg 5.9% 39%;
+    --gray-500: 240deg 5.9% 48%;
+    --gray-400: 240deg 5.9% 60%;
+    --gray-300: 240deg 5.9% 74%;
+    --gray-200: 240deg 5.9% 86%;
+    --gray-100: 240deg 6% 94%;
+    --gray-50: 240deg 7% 97%;
+
+    --background: var(--gray-950); /** 950 */
+
+    --primary: var(--gray-50); /** 50 */
+    --primary-foreground: var(--gray-950);
+
+    --foreground: var(--primary);
+
+    --secondary: var(--gray-800);
+    --secondary-foreground: var(--primary); /** 50 */
+
+    /* For hsl(241 88% 74% / <alpha-value>) */
+    --brand: 142.1 70.6% 45.3%;
+    --brand-foreground: var(--gray-950);
+
+    --brand-500: 245 82% 67%;
+    --brand-600: 250 74% 59%;
+    --brand-700: 251 57% 51%;
+    --brand-800: 250 54% 41%;
+    --brand-900: 249 46% 34%;
+    --brand-950: 250 47% 20%;
+
+    --muted: var(--secondary); /** 800 */
+    --muted-foreground: var(--gray-400); /** 400 */
+
+    --popover: var(--gray-950); /** 950*/
+    --popover-foreground: var(--primary);
+
+    --card: var(--gray-900); /** 950 */
+    --card-foreground: var(--primary);
+
+    --border: var(--secondary); /** 800 */
+    --input: var(--gray-900);
+
+    --accent: var(--secondary); /** 800 */
+    --accent-foreground: var(--primary); /** 50 */
+
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: var(--primary);
+
+    --ring: var(--gray-300);
+
+    --radius: 0.5rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-foreground/20;
+    @apply border-border box-border;
   }
+
+  body {
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .ligatures-none {
+    font-variant-ligatures: none;
+  }
+
+  .ligatures-common {
+    font-variant-ligatures: common;
+  }
+  .ligatures-discretionary {
+    font-variant-ligatures: discretionary;
+  }
+  .ligatures-historical {
+    font-variant-ligatures: historical;
+  }
+  .ligatures-contextual {
+    font-variant-ligatures: contextual;
+  }
+
+  .ligatures-no-common {
+    font-variant-ligatures: no-common;
+  }
+  .ligatures-no-discretionary {
+    font-variant-ligatures: no-discretionary;
+  }
+  .ligatures-no-historical {
+    font-variant-ligatures: no-historical;
+  }
+  .ligatures-no-contextual {
+    font-variant-ligatures: no-contextual;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+li {
+  list-style: unset;
+}
+
+ul {
+  list-style: unset;
+  list-style-type: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 8px;
+  border: 4px solid hsl(var(--primary-foreground));
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.2);
+}
+
+[placeholder]:empty:before {
+  content: attr(placeholder);
+  color: hsl(var(--muted-foreground));
+}
+
+[contentEditable]:empty:not(:focus):before {
+  content: attr(placeholder);
+}
+
+[contentEditable]:empty:before {
+  content: attr(placeholder);
 }
 
 .animate-in {

@@ -1,14 +1,20 @@
-import { GeistSans } from "geist/font/sans";
+import { fontMono, fontSans } from "@/lib/fonts";
+
+import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
 
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: {
+    default: "orchestr",
+    template: `%s | orchestr`,
+  },
+  description: "Orchestr your projects.",
 };
 
 export default function RootLayout({
@@ -17,11 +23,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+
+      <body
+        className={cn(
+          "h-screen w-screen  font-sans antialiased bg-background text-foreground",
+          fontMono.variable,
+          fontSans.variable
+        )}
+      >
+        <main className="relative flex-1 w-screen h-full">{children}</main>
       </body>
     </html>
   );

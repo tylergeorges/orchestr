@@ -1,9 +1,10 @@
 import Link from "next/link";
-import Step from "./Step";
 
-export default function SignUpUserSteps() {
+import { Step } from "./step";
+
+export function SignUpUserSteps() {
   return (
-    <ol className="flex flex-col gap-6">
+    <ol className="flex-1 w-full h-full flex flex-col gap-6">
       <Step title="Sign up your first user">
         <p>
           Head over to the{" "}
