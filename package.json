@@ -32,5 +32,11 @@
     "encoding": "^0.1.13",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
   }
 }
