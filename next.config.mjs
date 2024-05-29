@@ -1,4 +1,4 @@
-import "./lib/env.mjs";
+import "./lib/env.js";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = { reactStrictMode: true };
