@@ -34,20 +34,20 @@ export default function Login({
       .signInWithOAuth({
         provider,
 
-        // options: {
-        //   // redirectTo: "auth/callback"
-        //   redirectTo: "http://localhost:3000/auth/callback",
-        // },
+        options: {
+          redirectTo: `${
+            process.env.NEXT_PUBLIC_VERCEL_URL
+              ? "https://" + process.env.NEXT_PUBLIC_VERCEL_URL
+              : "http://localhost:3000"
+          }`,
+
+          // redirectTo: "auth/callback"
+          // redirectTo: "http://localhost:3000/auth/callback",
+        },
       })
       .finally(() => {
         setIsProviderLoading(false);
       });
-
-    // return signIn.authenticateWithRedirect({
-    // 	strategy,
-    // 	redirectUrl: "/sso-callback",
-    // 	redirectUrlComplete: "/home"
-    // });
   };
 
   return (

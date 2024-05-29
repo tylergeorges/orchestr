@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "ES2022"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -34,7 +34,10 @@
     "**/*.tsx",
     "tailwind.config.ts",
     ".next/types/**/*.ts",
-    "postcss.config.js"
+    "postcss.config.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.js"
   ],
   "exclude": ["node_modules"]
 }
