@@ -1,4 +1,4 @@
-import { Step } from "./step";
+import { Step } from "@/components/tutorial/step";
 
 export function ConnectSupabaseSteps() {
   return (

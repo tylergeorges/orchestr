@@ -1,9 +1,9 @@
-import { withTV } from "tailwind-variants/dist/transformer";
 import { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 import TailwindTypo from "@tailwindcss/typography";
+import { withTV } from "tailwind-variants/transformer";
 import TailwindAnimate from "tailwindcss-animate";
 import plugin from "tailwindcss/plugin";
 
