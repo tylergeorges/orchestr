@@ -1,78 +1,129 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from 'next/server';
+
+import { type CookieOptions, createServerClient } from '@supabase/ssr';
+import type { Database } from '@/lib/types/supabase';
 
 export const updateSession = async (request: NextRequest) => {
-  // This `try/catch` block is only here for the interactive tutorial.
-  // Feel free to remove once you have Supabase connected.
-  try {
-    // Create an unmodified response
-    let response = NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+  // const res =  await updateSession(request);
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          get(name: string) {
-            return request.cookies.get(name)?.value;
-          },
-          set(name: string, value: string, options: CookieOptions) {
-            // If the cookie is updated, update the cookies for the request and response
-            request.cookies.set({
-              name,
-              value,
-              ...options,
-            });
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
-            });
-            response.cookies.set({
-              name,
-              value,
-              ...options,
-            });
-          },
-          remove(name: string, options: CookieOptions) {
-            // If the cookie is removed, update the cookies for the request and response
-            request.cookies.set({
-              name,
-              value: "",
-              ...options,
-            });
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
-            });
-            response.cookies.set({
-              name,
-              value: "",
-              ...options,
-            });
-          },
+  const isRoute = (route: string) => request.nextUrl.pathname.startsWith(route);
+  // return res
+
+  const requestHeaders = new Headers(request.headers);
+
+  const pathname = request.nextUrl.pathname;
+  requestHeaders.set('x-url', pathname);
+
+  let response = NextResponse.next({
+    request: {
+      headers: requestHeaders
+    }
+  });
+
+  const supabase = createServerClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value;
         },
-      },
-    );
 
-    // This will refresh session if expired - required for Server Components
-    // https://supabase.com/docs/guides/auth/server-side/nextjs
-    await supabase.auth.getUser();
+        set(name: string, value: string, options: CookieOptions) {
+          request.cookies.set({
+            name,
+            value,
+            ...options
+          });
 
-    return response;
-  } catch (e) {
-    // If you are here, a Supabase client could not be created!
-    // This is likely because you have not set up environment variables.
-    // Check out http://localhost:3000 for Next Steps.
-    return NextResponse.next({
-      request: {
-        headers: request.headers,
-      },
-    });
+          response = NextResponse.next({
+            request: {
+              headers: requestHeaders
+            }
+          });
+
+          response.cookies.set({
+            name,
+            value,
+            ...options
+          });
+        },
+        remove(name: string, options: CookieOptions) {
+          request.cookies.set({
+            name,
+            value: '',
+            ...options
+          });
+
+          response = NextResponse.next({
+            request: {
+              headers: requestHeaders
+            }
+          });
+
+          response.cookies.set({
+            name,
+            value: '',
+            ...options
+          });
+        }
+      }
+    }
+  );
+  // const supabase = createServerClient<Database>(
+  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  //   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  //   {
+  //     cookies: {
+  //       get(name: string) {
+  //         return request.cookies.get(name)?.value;
+  //       },
+  //       set(name: string, value: string, options: CookieOptions) {
+  //         request.cookies.set({
+  //           name,
+  //           value,
+  //           ...options
+  //         });
+  //         response = NextResponse.next({
+  //           request: {
+  //             headers: request.headers
+  //           }
+  //         });
+  //         response.cookies.set({
+  //           name,
+  //           value,
+  //           ...options
+  //         });
+  //       },
+  //       remove(name: string, options: CookieOptions) {
+  //         request.cookies.set({
+  //           name,
+  //           value: "",
+  //           ...options
+  //         });
+  //         response = NextResponse.next({
+  //           request: {
+  //             headers: request.headers
+  //           }
+  //         });
+  //         response.cookies.set({
+  //           name,
+  //           value: "",
+  //           ...options
+  //         });
+  //       }
+  //     }
+  //   }
+  // );
+
+  const {
+    data: { user },
+    error
+  } = await supabase.auth.getUser();
+
+  if (isRoute('/home') && (error || !user)) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
+
+  return response;
 };

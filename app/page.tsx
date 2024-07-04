@@ -1,55 +1,45 @@
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { createClient } from "@/lib/supabase/server";
+import { Column } from '@/components/column';
+import { Icons } from '@/components/icons';
+import { Row } from '@/components/row';
+import { ButtonLink } from '@/components/ui/button';
 
-import { AuthButton } from "@components/auth-button";
-import { DeployButton } from "@components/deploy-button";
-import { Header } from "@components/header";
-
-export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
-
+export default function Index() {
   return (
-    <div className="gap-20 items-center container ">
-      <nav className="w-full flex justify-center border-b border-b-accent  h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
+    <Column className="h-full w-full flex-1 px-6 pb-20 center sm:pb-32 md:pt-32">
+      <Column className="xl:max-w-screen-lg mb-16 w-full gap-3 overflow-hidden rounded-b-2xl py-8 sm:mb-20 xl:self-auto">
+        {/* <span className="absolute bottom-0 mb-9 text-brand lg:mb-10 lg:ml-2">
+          <Icons.orchestr className="size-6 text-brand lg:size-12" animate />
+        </span> */}
+
+        <div className="relative animate-fade-up text-center text-5xl font-black leading-tight md:text-7xl">
+          <h1 className="m-0 animate-fade-up">Orchestr </h1>
+
+          <div className="animate-fade-up animate-delay-75">
+            Your{' '}
+            <span className="m-0 bg-gradient-to-r from-green-500 to-brand bg-clip-text text-transparent">
+              Social Symphony
+            </span>
+          </div>
         </div>
-      </nav>
 
-      <div className="animate-in flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6">
-          <h2 className="font-bold text-4xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main>
-      </div>
-
-      <footer className="w-full border-t border-t-accent p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
+        <p className="m-0 animate-fade-up text-center text-xl font-medium text-muted-foreground animate-delay-100 md:text-2xl">
+          Where your passions meet a symphony of connections.
         </p>
-      </footer>
-    </div>
+
+        <Row className="mt-5 animate-fade-up gap-6 center-h animate-delay-150">
+          <ButtonLink href="/login" color="primary" className="group" size="xl">
+            <span className="transition duration-300 ease-in-out group-hover:-translate-x-2">
+              Get Started
+            </span>
+
+            <Icons.rightArrow className="absolute right-1 size-5 translate-x-full text-current opacity-0 transition duration-300 ease-in-out group-hover:-translate-x-1 group-hover:opacity-100" />
+          </ButtonLink>
+
+          <ButtonLink className="group relative size-14 overflow-hidden" size="icon">
+            <Icons.gitHub className="size-6 text-current" />
+          </ButtonLink>
+        </Row>
+      </Column>
+    </Column>
   );
 }

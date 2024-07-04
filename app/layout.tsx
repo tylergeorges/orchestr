@@ -1,39 +1,65 @@
-import { fontMono, fontSans } from "@/lib/fonts";
+import { fontMono, fontSans } from '@/lib/fonts';
+import type { Metadata } from 'next';
+import { Toaster } from 'sonner';
 
-import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
-import "./globals.css";
+import { cn } from '@/utils/cn';
+
+import { ModalRenderer } from '@/components/modal';
+import { ReactQueryClientProvider } from '@/components/providers/react-query-client-provider';
+
+import { NavHeader } from '@/components/nav-header';
+import { NavMobileFooter } from '@/components/nav-mobile-footer';
+import './globals.css';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+  : 'http://localhost:3000';
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: {
-    default: "orchestr",
-    template: `%s | orchestr`,
+    default: 'orchestr',
+    template: `%s | orchestr`
   },
-  description: "Orchestr your projects.",
+  description: 'Orchestr posts.'
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className="relative h-full w-full" lang="en" suppressHydrationWarning>
       <head />
 
       <body
         className={cn(
-          "h-screen w-screen  font-sans antialiased bg-background text-foreground",
+          'relative flex h-full w-full flex-1 flex-col overflow-hidden bg-background font-sans text-foreground antialiased',
           fontMono.variable,
           fontSans.variable
         )}
       >
-        <main className="relative flex-1 w-screen h-full">{children}</main>
+        <ReactQueryClientProvider>
+          <ModalRenderer />
+          <Toaster
+            toastOptions={{
+              // unstyled: true,
+              classNames: {
+                toast: cn('flex items-center rounded-md border-none text-primary'),
+
+                success: cn('bg-success text-primary'),
+
+                error: cn('bg-destructive text-destructive-foreground'),
+
+                title: 'font-bold',
+
+                description: cn('text-current/90')
+              }
+            }}
+          />
+
+          <NavHeader />
+
+          <main className="w-full flex-1 overflow-auto">{children}</main>
+          <NavMobileFooter />
+        </ReactQueryClientProvider>
       </body>
     </html>
   );

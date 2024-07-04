@@ -1,0 +1,17 @@
+{
+  "javascript.referencesCodeLens.enabled": false,
+  "errorLens.codeLensTemplate": "$message",
+  "errorLens.statusBarMessageTemplate": "$message",
+  "errorLens.messageEnabled": true,
+  "errorLens.statusBarMessageEnabled": true,
+  "errorLens.scrollbarHackEnabled": true,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+
+  "editor.codeActionsOnSave": {
+    // "source.fixAll": "explicit",
+
+    "source.fixAll.eslint": "explicit"
+  },
+
+  "editor.formatOnSave": true
+}

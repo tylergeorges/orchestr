@@ -3,6 +3,7 @@
     "target": "es2022",
     "lib": ["dom", "dom.iterable", "ES2022"],
     "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,6 +16,7 @@
     "jsx": "preserve",
     "incremental": true,
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
 
     "plugins": [
       {
@@ -30,14 +32,25 @@
   },
   "include": [
     "next-env.d.ts",
+    // "lib/**/*.ts",
+    // "lib/**/*.tsx",
+    // "utils/**/*.ts",
+    // "utils/**/*.tsx",
+    // "components/**/*.tsx",
+    // "components/**/*.ts",
+    // "app/**/*.ts",
+    // "**/app/**/*.tsx",
+    // "hooks/**/*.tsx",
+    // "hooks/**/*.ts",
     "**/*.ts",
+    "**/*.config.ts",
     "**/*.tsx",
-
-    "tailwind.config.ts",
+    "next.config.js",
+    "drizzle.config.ts",
     ".next/types/**/*.ts",
-    "**/*.cjs",
-    "**/*.mjs",
-    "**/*.js"
+    "./tailwind.config.ts",
+    // "eslint.config.js",
+    "app.types.ts"
   ],
   "exclude": ["node_modules"]
 }

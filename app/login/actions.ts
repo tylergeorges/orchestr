@@ -1,48 +1,51 @@
-"use server";
+'use server';
 
-import { createClient } from "@/lib/supabase/server";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { createClient } from '@/lib/supabase/server';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export const signIn = async (formData: FormData) => {
-  "use server";
+  'use server';
 
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const supabase = createClient();
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const supabase = await createClient();
 
   const { error } = await supabase.auth.signInWithPassword({
     email,
-    password,
+    password
   });
 
   if (error) {
-    return redirect("/login?message=Could not authenticate user");
+    return redirect('/login?message=Could not authenticate user');
   }
 
-  return redirect("/protected");
+  return redirect('/home');
 };
 
-export const signUp = async (formData: FormData) => {
-  "use server";
+export const signInWithEmail = async (email: string) => {
+  // export const signInWithEmail = async (prevState: { message: string }, formData: FormData) => {
+  'use server';
 
-  const origin = headers().get("origin");
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const supabase = createClient();
+  const origin = headers().get('origin');
+  const supabase = await createClient();
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${origin}/auth/callback`,
-    },
+  if (!email.trim()) {
+    return {
+      message: 'Email is required'
+    };
+  }
+
+  const { error } = await supabase.auth.admin.inviteUserByEmail(email, {
+    redirectTo: `${origin}/auth/callback`
   });
 
   if (error) {
-    return redirect("/login?message=Could not authenticate user");
+    return {
+      message: error.message
+    };
+    // return redirect(`/login?message=${error.message}`);
   }
 
-  return redirect("/login?message=Check email to continue sign in process");
+  return redirect('/home');
 };
-

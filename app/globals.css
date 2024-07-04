@@ -20,7 +20,7 @@
   }
 
   .horizontal.center {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 
   .vertical.center-v {
@@ -32,7 +32,7 @@
   }
 
   .vertical.center {
-    @apply justify-center items-center;
+    @apply items-center justify-center;
   }
 
   .space-between {
@@ -42,8 +42,9 @@
 
 @layer base {
   :root {
-    --gray-950: 240deg 5.9% 10%;
-    --gray-900: 240deg 5.9% 13%;
+    --gray-950: 240deg 5.9% 9%;
+    --gray-900: 240deg 5.9% 12%;
+    --gray-850: 240deg 5.9% 13%;
     --gray-800: 240deg 5.9% 19%;
     --gray-700: 240deg 5.9% 32%;
     --gray-600: 240deg 5.9% 39%;
@@ -56,12 +57,12 @@
 
     --background: var(--gray-950); /** 950 */
 
-    --primary: var(--gray-50); /** 50 */
+    --primary: var(--gray-200); /** 50 */
     --primary-foreground: var(--gray-950);
 
     --foreground: var(--primary);
 
-    --secondary: var(--gray-800);
+    --secondary: var(--gray-850);
     --secondary-foreground: var(--primary); /** 50 */
 
     /* For hsl(241 88% 74% / <alpha-value>) */
@@ -75,7 +76,7 @@
     --brand-900: 249 46% 34%;
     --brand-950: 250 47% 20%;
 
-    --muted: var(--secondary); /** 800 */
+    --muted: var(--gray-600); /** 600 */
     --muted-foreground: var(--gray-400); /** 400 */
 
     --popover: var(--gray-950); /** 950*/
@@ -87,7 +88,7 @@
     --border: var(--secondary); /** 800 */
     --input: var(--gray-900);
 
-    --accent: var(--secondary); /** 800 */
+    --accent: var(--gray-800); /** 800 */
     --accent-foreground: var(--primary); /** 50 */
 
     --destructive: 0 72.2% 50.6%;
@@ -101,11 +102,13 @@
 
 @layer base {
   * {
-    @apply border-border box-border;
+    @apply box-border border-border;
   }
 
   body {
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 
@@ -176,17 +179,24 @@ ul {
   background: hsl(var(--primary) / 0.2);
 }
 
-[placeholder]:empty:before {
-  content: attr(placeholder);
-  color: hsl(var(--muted-foreground));
-}
-
 [contentEditable]:empty:not(:focus):before {
   content: attr(placeholder);
 }
 
 [contentEditable]:empty:before {
   content: attr(placeholder);
+  color: hsl(var(--muted));
+  pointer-events: none;
+  /* position: absolute; */
+  /* left: 0.25rem; */
+  /* top: 10px; */
+}
+
+[contentEditable] {
+  /* position: relative; */
+  word-wrap: break-word;
+  word-break: break-all;
+  -webkit-user-modify: read-write-plaintext-only;
 }
 
 .animate-in {

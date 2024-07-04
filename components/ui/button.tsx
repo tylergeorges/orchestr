@@ -1,77 +1,170 @@
-import { forwardRef } from "react";
-import { tv, type VariantProps } from "tailwind-variants";
+import { forwardRef } from 'react';
+import { tv, type VariantProps } from 'tailwind-variants';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/utils/cn';
 
 const buttonVariants = tv({
   base: cn(
-    "relative inline-flex items-center justify-center rounded-sm whitespace-nowrap text-center font-semibold text-xs transition duration-200 ease-out",
-    "outline-none focus-visible:ring-2 ring-ring",
-    "disabled:cursor-not-allowed disabled:opacity-50"
+    'relative inline-flex items-center whitespace-nowrap rounded-md px-4 py-2 text-center text-sm transition duration-200 ease-out',
+    'outline-none ring-ring focus-visible:ring-2',
+    'items-center justify-center overflow-hidden align-middle font-bold disabled:cursor-not-allowed disabled:opacity-50'
   ),
 
   variants: {
+    color: {
+      default: 'bg-secondary text-secondary-foreground hover:bg-accent',
+
+      primary: 'bg-primary text-primary-foreground hover:bg-primary/80',
+
+      brand: 'bg-brand text-brand-foreground hover:bg-brand/80',
+
+      destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80'
+    },
+
     variant: {
-      default:
-        "bg-secondary text-secondary-foreground enabled:hover:bg-secondary-foreground enabled:hover:bg-secondary/80",
+      default: '',
 
-      primary: "bg-primary text-primary-foreground enabled:hover:bg-opacity-80",
-
-      brand: "bg-brand text-brand-foreground enabled:hover:bg-brand/80",
-
-      destructive:
-        "bg-destructive text-destructive-foreground enabled:hover:bg-destructive/80",
-
-      link: "bg-transparent text-primary enabled:hover:underline",
+      link: 'bg-transparent hover:underline',
 
       outline:
-        "border border-secondary bg-transparent text-primary enabled:hover:bg-secondary",
+        'border border-border bg-transparent text-primary hover:bg-secondary hover:text-secondary-foreground',
 
-      ghost: "bg-transparent text-primary enabled:hover:bg-secondary",
+      ghost: 'bg-transparent text-secondary-foreground hover:bg-muted',
 
-      transparent:
-        "bg-transparent text-muted enabled:hover:bg-secondary enabled:hover:text-primary",
-
-      icon: "",
+      transparent: 'bg-transparent'
     },
 
     size: {
-      xs: "w-[52px]  min-w-[52px] h-5 gap-1 px-2 py-2",
-      sm: "w-[60px]  min-w-[60px] h-9 gap-1 px-4 py-2",
-      md: "w-[96px]  min-w-[96px] h-9 gap-2 px-4 py-2 text-sm",
-      lg: "w-[130px] min-w-[130px] min-h-[2.5rem] h-10 gap-2 px-6 py-2 text-sm",
+      xs: 'w-[52px] min-w-[52px] gap-1 p-1 text-xs',
+
+      sm: 'h-9 gap-1 px-3 py-2 text-xs',
+
+      md: 'h-10 gap-2 px-6 py-3 text-sm',
+
+      lg: 'h-11 gap-3 px-7 py-3.5 text-base',
+
+      xl: 'h-14 gap-2 rounded-lg px-6 text-base',
+
+      icon: 'size-10 p-0'
+    },
+
+    round: {
+      true: 'rounded-full'
     },
 
     fill: {
-      true: "w-full",
-    },
+      true: 'w-full'
+    }
   },
 
   defaultVariants: {
-    variant: "default",
-    size: "md",
+    color: 'default',
+    variant: 'default',
+    size: 'md'
   },
+
+  compoundVariants: [
+    {
+      color: 'brand',
+      variant: 'outline',
+      className:
+        'border border-brand bg-transparent text-brand hover:bg-brand hover:text-brand-foreground'
+    },
+    {
+      color: 'primary',
+      variant: 'outline',
+      className:
+        'border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground'
+    },
+    {
+      color: 'destructive',
+      variant: 'outline',
+      className:
+        'border border-destructive bg-transparent text-destructive hover:bg-destructive hover:text-destructive-foreground'
+    },
+    {
+      color: 'default',
+      variant: 'outline',
+      className:
+        'border border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground'
+    },
+
+    {
+      color: 'brand',
+      variant: 'ghost',
+      className: 'bg-transparent text-brand hover:bg-brand hover:text-brand-foreground'
+    },
+    {
+      color: 'primary',
+      variant: 'ghost',
+      className: 'bg-transparent text-primary hover:bg-primary hover:text-primary-foreground'
+    },
+    {
+      color: 'destructive',
+      variant: 'ghost',
+      className:
+        'bg-transparent text-destructive hover:bg-destructive hover:text-destructive-foreground'
+    },
+    {
+      color: 'default',
+      variant: 'ghost',
+      className: 'bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground'
+    }
+  ]
 });
 
-type ButtonVariants = VariantProps<typeof buttonVariants>;
+export type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'color'>,
     ButtonVariants {}
 
-export const Button = forwardRef<
-  HTMLButtonElement,
-  React.PropsWithChildren<ButtonProps>
->(({ className, children, variant, fill, size, ...props }, ref) => {
-  return (
-    <button
-      {...props}
-      className={cn(buttonVariants({ variant, fill, size }), className)}
-      ref={ref}
-    >
-      {children}
-    </button>
-  );
-});
+export const Button = forwardRef<HTMLButtonElement, React.PropsWithChildren<ButtonProps>>(
+  ({ className, children, variant, color, fill, size, round, ...props }, ref) => {
+    return (
+      <button
+        {...props}
+        className={cn(buttonVariants({ variant, color, round, fill, size }), className)}
+        ref={ref}
+      >
+        {children}
+      </button>
+    );
+  }
+);
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
+
+interface ButtonLinkProps
+  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
+    ButtonVariants {
+  active?: boolean;
+}
+
+export const ButtonLink = forwardRef<HTMLAnchorElement, React.PropsWithChildren<ButtonLinkProps>>(
+  ({ className, children, color, active, variant, fill, round, size, ...props }, ref) => {
+    const watchActiveState = typeof active !== 'undefined';
+
+    return (
+      <a
+        {...props}
+        className={cn(
+          'cursor-pointer',
+          buttonVariants({
+            variant: watchActiveState ? (active ? 'default' : 'ghost') : variant,
+            fill,
+            round,
+            color,
+            size
+          }),
+          className
+        )}
+        ref={ref}
+      >
+        {children}
+      </a>
+    );
+  }
+);
+
+ButtonLink.displayName = 'ButtonLink';
