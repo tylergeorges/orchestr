@@ -6,6 +6,7 @@ import type { InputVariants } from '@/components/ui/input';
 
 import { inputVariants } from '@/components/ui/input';
 import { cn } from '@/utils/cn';
+import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect';
 
 type BaseDivProps = ElementPropsWithVariants<ElementProps<'div'>, InputVariants>;
 
@@ -18,9 +19,15 @@ export const ContentEditable = forwardRef<HTMLDivElement, ContentEditableProps>(
   ({ className, variant, onSubmit, ...props }, ref) => {
     const inputRef = useRef<HTMLDivElement>(null);
 
-    if (ref) {
-      ref.current = inputRef.current;
-    }
+    useIsomorphicLayoutEffect(() => {
+      const input = inputRef.current;
+
+      if (typeof ref === 'function') {
+        ref(input);
+      } else if (ref) {
+        ref.current = input;
+      }
+    });
 
     const clearInput = () => {
       const input = inputRef.current;

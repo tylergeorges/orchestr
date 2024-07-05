@@ -4,6 +4,7 @@ import { dehydrate } from '@tanstack/react-query';
 
 import { getQueryClient } from '@/lib/get-query-client';
 import { Routes } from '@/lib/routes';
+import { postQueries } from '@/lib/queries/posts';
 
 import { HydrationProvider } from '@/components/providers/hydration-provider';
 import { ExpandedPost } from '@/components/ui/expanded-post';
@@ -12,22 +13,12 @@ import { PostDivider } from '@/components/post';
 import { Column } from '@/components/column';
 import { BackButton } from '@/components/back-button';
 import { Feed } from '@/components/feed';
-import { postQueries } from '@/lib/queries/posts';
-import { getUser } from '@/utils/get-user';
-import { redirect } from 'next/navigation';
 
 interface PostPostProps {
   params: typeof Routes.post.params;
 }
 
-export default async function PostsPage({ params }: PostPostProps) {
-  const {
-    data: { user },
-    error
-  } = await getUser();
-
-  // if (!user || error) return redirect('/login');
-
+export default async function PostPage({ params }: PostPostProps) {
   const { postId } = Routes.post.parse(params);
 
   const queryClient = getQueryClient();
@@ -35,7 +26,7 @@ export default async function PostsPage({ params }: PostPostProps) {
   const queries = await postQueries();
 
   const post = await queryClient.fetchQuery({
-    queryKey: ['post', postId],
+    queryKey: ['postById', postId],
     queryFn: () => queries.queries.postById(postId)
   });
 
@@ -56,7 +47,7 @@ export default async function PostsPage({ params }: PostPostProps) {
         <PostDivider />
       </Column>
 
-      <ExpandedPost post={post} />
+      <ExpandedPost post={post} queryKey={'postById'} />
 
       <CreatePostForm parentId={postId} />
 

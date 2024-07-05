@@ -12,7 +12,7 @@ export const useCreatePost = () => {
 
       await queryClient.cancelQueries({ queryKey });
 
-      const previousPosts = queryClient.getQueryData(queryKey) ?? [];
+      const previousPosts = queryClient.getQueryData(queryKey) as (typeof newPost)[] ?? [];
 
       queryClient.setQueryData(queryKey, [newPost, ...previousPosts]);
 

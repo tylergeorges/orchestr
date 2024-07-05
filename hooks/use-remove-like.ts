@@ -5,7 +5,7 @@ import { useSupabaseBrowser } from '@/lib/supabase/client';
 import { useUpdatePostLikes } from '@/hooks/use-update-post-likes';
 import { PostsWithMeta } from '@/lib/types/supabase';
 
-export function useRemoveLike(post: PostsWithMeta, postKey: string) {
+export function useRemoveLike(post: Defined<PostsWithMeta>, postKey: string) {
   const supabase = useSupabaseBrowser();
 
   const { mutate: updatePostMutation } = useUpdatePostLikes(postKey);

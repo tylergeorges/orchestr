@@ -5,14 +5,7 @@ import plugin from 'tailwindcss/plugin';
 
 import { withTV } from 'tailwind-variants/transformer';
 
-// import TailwindTypo from '@tailwindcss/typography';
-// import TailwindAnimate from 'tailwindcss-animated';
-
 import { generateScreens } from './utils/generate-tailwind-screens';
-
-//prettier-  "plugins": ["prettier-plugin-tailwindcss"],
-
-console.log('tailwind confgig');
 
 const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './lib/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],

@@ -1,7 +1,5 @@
-import { config } from 'dotenv';
+import { env } from '@/lib/env';
 import type { Config } from 'drizzle-kit';
-
-config({ path: '.env' });
 
 export default {
   schema: './lib/db/schema/*',
@@ -9,6 +7,6 @@ export default {
   dialect: 'postgresql',
   schemaFilter: ['public'],
   dbCredentials: {
-    url: process.env.POSTGRES_URL!
+    url: env.POSTGRES_URL
   }
 } satisfies Config;

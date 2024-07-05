@@ -1,17 +1,18 @@
 'use server';
 
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
+import { type NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
 import type { Database } from '@/lib/types/supabase';
-import { type NextRequest, NextResponse } from 'next/server';
+import { env } from '@/lib/env';
 
 export const createClient = async () => {
   const cookieStore = cookies();
 
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
 
     {
       cookies: {
@@ -43,8 +44,8 @@ export const createClient = async () => {
 
 export const createMiddlewareClient = async (request: NextRequest, response: NextResponse) => {
   return createServerClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    env.NEXT_PUBLIC_SUPABASE_URL,
+    env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
         get(name: string) {

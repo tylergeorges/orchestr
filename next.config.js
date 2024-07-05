@@ -8,7 +8,7 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com'
       }
     ]
-  },
+  }
 
   // transpilePackages: ['lucide-react'] // add this
 

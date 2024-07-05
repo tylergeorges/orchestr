@@ -1,19 +1,18 @@
-import { fontMono, fontSans } from '@/lib/fonts';
+import './globals.css';
+
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
 import { cn } from '@/utils/cn';
+import { fontMono, fontSans } from '@/lib/fonts';
+import { getBaseUrl } from '@/utils/get-base-url';
 
 import { ModalRenderer } from '@/components/modal';
 import { ReactQueryClientProvider } from '@/components/providers/react-query-client-provider';
-
 import { NavHeader } from '@/components/nav-header';
 import { NavMobileFooter } from '@/components/nav-mobile-footer';
-import './globals.css';
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+const defaultUrl = getBaseUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),

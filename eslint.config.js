@@ -1,4 +1,3 @@
-import js from '@eslint/js';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 
 import globals from 'globals';
@@ -10,13 +9,7 @@ import nextPlugin from '@next/eslint-plugin-next';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
 
-/** @typedef {import('eslint').Linter.FlatConfig} */
-let FlatConfig;
-
-/** @typedef {import('eslint').Linter.ParserModule} */
-let ParserModule;
-
-/** @type {FlatConfig} */
+/** @type {import('eslint').Linter.FlatConfig} */
 let jsConfig = {
   languageOptions: {
     globals: globals.browser,
@@ -77,10 +70,10 @@ let jsConfig = {
   }
 };
 
-/** @type {FlatConfig} */
+/** @type {import('eslint').Linter.FlatConfig} */
 let typescriptPlugin = {
   languageOptions: {
-    parser: /** @type {ParserModule} */ (tsParser),
+    parser: /** @type {import('eslint').Linter.ParserModule} */ (tsParser),
     parserOptions: {
       project: './tsconfig.json'
     }
@@ -111,7 +104,7 @@ let typescriptPlugin = {
   }
 };
 
-/** @type {FlatConfig} */
+/** @type {import('eslint').Linter.FlatConfig} */
 let reactConfig = {
   plugins: {
     react: reactPlugin
@@ -138,7 +131,7 @@ let reactConfig = {
   // }
 };
 
-/** @type {FlatConfig} */
+/** @type {import('eslint').Linter.FlatConfig} */
 let reactHooksConfig = {
   plugins: {
     'react-hooks': hooksPlugin
@@ -147,7 +140,7 @@ let reactHooksConfig = {
   rules: hooksPlugin.configs.recommended.rules
 };
 
-/** @type {FlatConfig} */
+/** @type {import('eslint').Linter.FlatConfig} */
 let nextConfig = {
   plugins: {
     '@next/next': nextPlugin
@@ -159,7 +152,7 @@ let nextConfig = {
   }
 };
 
-/** @type {FlatConfig[]} */
+/** @type {import('eslint').Linter.FlatConfig}[] */
 let overridesConfigs = [
   {
     files: ['**/*.ts', '**/*.tsx'],
@@ -177,7 +170,7 @@ let overridesConfigs = [
   }
 ];
 
-/** @type {FlatConfig[]} */
+/** @type {import('eslint').Linter.FlatConfig}[]*/
 const config = [
   jsConfig,
   reactConfig,

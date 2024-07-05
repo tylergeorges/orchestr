@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 
 import { generateTimestamp } from '@/utils/generate-timestamp';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { ContentEditable } from '@/components/ui/content-editable';
 import { useUser } from '@/components/providers/auth-provider';
@@ -39,7 +38,6 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
         created_at: generateTimestamp(),
         like_count: 0,
         reply_count: 0,
-        profiles: profile,
         reply_to: parentId
       });
     } else {
@@ -50,8 +48,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
         created_at: generateTimestamp(),
         like_count: 0,
         reply_count: 0,
-        profiles: profile,
-        is_liked: false,
+        // is_liked: false,
         reply_to: null
       });
     }
@@ -80,7 +77,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
           </div>
 
           <Row className="justify-between center-v">
-            <Button variant="primary">Post</Button>
+            <Button color="primary">Post</Button>
           </Row>
         </Column>
       </Row>

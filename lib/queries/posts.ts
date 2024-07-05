@@ -1,6 +1,6 @@
 'use server';
 
-import type { TypedSupabaseClient } from '@/lib/types';
+import type { PostsWithLikes, TypedSupabaseClient } from '@/lib/types';
 import type { Posts, PostsWithMeta } from '@/lib/types/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { createQueryBuilder } from '@/lib/quardian/create-query-builder';
@@ -32,7 +32,7 @@ export const postQueries = createQueryBuilder()
 
     const post = await createPostsQuery(client).eq('id', postId).single();
 
-    return post.data;
+    return post.data as Defined<PostsWithMeta & PostsWithLikes>;
   })
   .query('getReplies', async (parentId: string) => {
     const client = await createClient();
@@ -66,7 +66,7 @@ export const postQueries = createQueryBuilder()
 
     return createdPost.data;
   })
-  .mutation('updatePost', async (post: PostsWithMeta & { id: string }) => {
+  .mutation('updatePost', async (post: Defined<PostsWithMeta> & { id: string }) => {
     const client = await createClient();
 
     const updated = await client

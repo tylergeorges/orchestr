@@ -14,12 +14,11 @@ import { useUser } from '@/components/providers/auth-provider';
 
 import { Icons } from '@/components/icons';
 import { Time } from '@/components/ui/time';
-import { Divider } from '@/components/ui/divider';
 
 dayjs.extend(dayjsTwitter);
 
 interface PostProps {
-  post: PostsWithMeta & PostsWithLikes;
+  post: Defined<PostsWithMeta>;
 }
 
 export const Post = ({ post, children }: WithChildren<PostProps>) => {

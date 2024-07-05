@@ -10,7 +10,7 @@ export const useCreateReply = () => {
     onMutate: async (newPost: Posts) => {
       await queryClient.cancelQueries({ queryKey: ['getReplies'] });
 
-      const previousPosts = queryClient.getQueryData<Posts[]>(['getReplies']);
+      const previousPosts = queryClient.getQueryData<Posts[]>(['getReplies']) ?? [];
 
       queryClient.setQueryData(['getReplies'], () => [newPost, ...previousPosts]);
 

@@ -60,14 +60,17 @@ export const NavLink = <T extends string>({
   );
 };
 
-interface NavIconProps<T extends string> extends LinkProps<T> {
-  icon: IconNames;
+interface NavIconProps<T extends string, IconName extends IconNames = IconNames>
+  extends LinkProps<T> {
+  icon: IconName extends `${infer I}Fill` ? I : never;
 }
 
 export const NavIcon = <T extends string>({ href, className, icon, ...props }: NavIconProps<T>) => {
   const isActive = useIsPathActive(href);
 
-  const Icon = Icons[isActive ? `${icon}Fill` : icon];
+  const currentIcon = isActive ? (`${icon}Fill` as const) : icon;
+
+  const Icon = Icons[currentIcon];
 
   return (
     <Link

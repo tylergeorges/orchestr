@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "turbo": "next dev --turbo",
     "codegen": "npx supabase gen types typescript --linked  > lib/types/supabase.ts && npx better-supabase-types -i lib/types/supabase.ts -f",
     "db:push": "drizzle-kit push",

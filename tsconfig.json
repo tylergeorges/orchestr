@@ -17,6 +17,7 @@
     "incremental": true,
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
 
     "plugins": [
       {
@@ -32,6 +33,7 @@
   },
   "include": [
     "next-env.d.ts",
+    // "*.js",
     // "lib/**/*.ts",
     // "lib/**/*.tsx",
     // "utils/**/*.ts",

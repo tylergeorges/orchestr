@@ -10,6 +10,7 @@ import * as z from 'zod';
 import { signInWithEmail } from '@/app/login/actions';
 import { emailAuthSchema } from '@/lib/validations/auth';
 import { useSupabaseBrowser } from '@/lib/supabase/client';
+import { getBaseUrl } from '@/utils/get-base-url';
 
 import { Icons } from '@/components/icons';
 import { Divider } from '@/components/ui/divider';
@@ -68,9 +69,7 @@ export const LoginForm = () => {
       provider,
 
       options: {
-        redirectTo: process.env.NEXT_PUBLIC_VERCEL_URL
-          ? 'https://' + process.env.NEXT_PUBLIC_VERCEL_URL + '/auth/callback'
-          : 'http://localhost:3000/auth/callback'
+        redirectTo: `${getBaseUrl()}/auth/callback`
       }
     });
   };

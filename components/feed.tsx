@@ -38,7 +38,7 @@ export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
     return;
   }
 
-  const posts = (data as (PostsWithMeta & PostsWithLikes)[]) ?? [];
+  const posts = (data as Defined<PostsWithMeta & PostsWithLikes>[]) ?? [];
 
   return (
     <Column className="flex-1">

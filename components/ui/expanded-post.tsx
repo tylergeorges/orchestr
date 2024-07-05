@@ -1,6 +1,6 @@
-'use client';
-
 import type { PostsWithLikes } from '@/lib/types';
+import { PostsWithMeta } from '@/lib/types/supabase';
+import { usePostsQuery } from '@/hooks/use-posts';
 
 import {
   EmptyDivider,
@@ -17,11 +17,14 @@ import { Column } from '@/components/column';
 import { Row } from '@/components/row';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
+type PostsQueryType = Parameters<typeof usePostsQuery>;
+
 interface ExpandedPostProps {
-  post: Defined<PostsWithLikes>;
+  post: Defined<PostsWithLikes & PostsWithMeta>;
+  queryKey: PostsQueryType[0];
 }
 
-export const ExpandedPost = ({ post }: ExpandedPostProps) => {
+export const ExpandedPost = ({ post, queryKey }: ExpandedPostProps) => {
   return (
     <Post post={post} key={post.id}>
       <Row className="h-full flex-1 gap-4 p-6">
@@ -56,7 +59,7 @@ export const ExpandedPost = ({ post }: ExpandedPostProps) => {
                 {post.reply_count}
               </PostButton>
 
-              <LikeButton post={post} />
+              <LikeButton post={post} queryKey={queryKey} />
             </PostButtonWrapper>
           </Column>
         </Column>
