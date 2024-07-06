@@ -35,7 +35,12 @@ export default function Index() {
             <Icons.rightArrow className="absolute right-1 size-5 translate-x-full text-current opacity-0 transition duration-300 ease-in-out group-hover:-translate-x-1 group-hover:opacity-100" />
           </ButtonLink>
 
-          <ButtonLink className="group relative size-14 overflow-hidden" size="icon">
+          <ButtonLink
+            className="group relative size-14 overflow-hidden"
+            size="icon"
+            target="_blank"
+            href="https://github.com/tylergeorges/orchestr"
+          >
             <Icons.gitHub className="size-6 text-current" />
           </ButtonLink>
         </Row>
