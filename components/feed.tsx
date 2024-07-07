@@ -2,6 +2,10 @@
 
 import { toast } from 'sonner';
 
+import { usePostsQuery } from '@/hooks/use-posts';
+import type { PostsWithLikes } from '@/lib/types';
+import type { PostsWithMeta } from '@/lib/types/supabase';
+
 import {
   EmptyDivider,
   LikeButton,
@@ -16,11 +20,7 @@ import {
 } from '@/components/post';
 import { Column } from '@/components/column';
 import { Row } from '@/components/row';
-
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { PostsWithLikes } from '@/lib/types';
-import { usePostsQuery } from '@/hooks/use-posts';
-import { PostsWithMeta } from '@/lib/types/supabase';
 
 type PostsQueryType = Parameters<typeof usePostsQuery>;
 

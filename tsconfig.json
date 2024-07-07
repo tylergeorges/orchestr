@@ -18,7 +18,6 @@
     "strictNullChecks": true,
     "allowSyntheticDefaultImports": true,
     "noErrorTruncation": true,
-
     "plugins": [
       {
         "name": "next"
@@ -33,17 +32,6 @@
   },
   "include": [
     "next-env.d.ts",
-    // "*.js",
-    // "lib/**/*.ts",
-    // "lib/**/*.tsx",
-    // "utils/**/*.ts",
-    // "utils/**/*.tsx",
-    // "components/**/*.tsx",
-    // "components/**/*.ts",
-    // "app/**/*.ts",
-    // "**/app/**/*.tsx",
-    // "hooks/**/*.tsx",
-    // "hooks/**/*.ts",
     "**/*.ts",
     "**/*.config.ts",
     "**/*.tsx",
@@ -51,7 +39,6 @@
     "drizzle.config.ts",
     ".next/types/**/*.ts",
     "./tailwind.config.ts",
-    // "eslint.config.js",
     "app.types.ts"
   ],
   "exclude": ["node_modules"]

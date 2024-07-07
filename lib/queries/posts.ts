@@ -38,8 +38,6 @@ export const postQueries = createQueryBuilder()
     const client = await createClient();
     const posts = await createPostsQuery(client).eq('reply_to', parentId);
 
-    // const post = await createPostsQuery(client).eq('id', post).single();
-
     return posts.data;
   })
   .mutation('createPost', async (post: Posts) => {

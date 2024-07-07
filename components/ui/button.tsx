@@ -1,8 +1,8 @@
 import { forwardRef } from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
+import Link from 'next/link';
 
 import { cn } from '@/utils/cn';
-import Link from 'next/link';
 
 const buttonVariants = tv({
   base: cn(
@@ -17,7 +17,7 @@ const buttonVariants = tv({
 
       primary: 'bg-primary text-primary-foreground hover:bg-primary/80',
 
-      brand: 'bg-brand text-brand-foreground hover:bg-brand/80 ring-brand/70',
+      brand: 'bg-brand text-brand-foreground ring-brand/70 hover:bg-brand/80',
 
       destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80'
     },

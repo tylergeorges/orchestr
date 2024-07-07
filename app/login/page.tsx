@@ -1,9 +1,11 @@
 'use server';
 
+import { redirect } from 'next/navigation';
+
+import { getUser } from '@/utils/get-user';
+
 import { Column } from '@/components/column';
 import { LoginForm } from '@/components/login-form';
-import { getUser } from '@/utils/get-user';
-import { redirect } from 'next/navigation';
 
 export default async function Login() {
   const {

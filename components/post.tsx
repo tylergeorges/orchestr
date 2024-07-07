@@ -4,13 +4,13 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 
-import { cn } from '@/utils/cn';
 import dayjsTwitter from '@/lib/dayjs-twitter';
-import type { Likes, PostsWithMeta } from '@/lib/types/supabase';
-import type { PostsWithLikes } from '@/lib/types';
+import { cn } from '@/utils/cn';
 import { useLikePost } from '@/hooks/use-like-post';
 import { useRemoveLike } from '@/hooks/use-remove-like';
 import { useUser } from '@/components/providers/auth-provider';
+import type { Likes, PostsWithMeta } from '@/lib/types/supabase';
+import type { PostsWithLikes } from '@/lib/types';
 
 import { Icons } from '@/components/icons';
 import { Time } from '@/components/ui/time';

@@ -26,6 +26,7 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     </div>
   )
 );
+
 CardHeader.displayName = 'CardHeader';
 
 export const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHeadingElement>>(
@@ -39,6 +40,7 @@ export const CardTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLHea
     </h3>
   )
 );
+
 CardTitle.displayName = 'CardTitle';
 
 export const CardDescription = forwardRef<
@@ -59,6 +61,7 @@ export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
     </div>
   )
 );
+
 CardContent.displayName = 'CardContent';
 
 export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
@@ -68,4 +71,5 @@ export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     </div>
   )
 );
+
 CardFooter.displayName = 'CardFooter';

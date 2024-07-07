@@ -2,10 +2,11 @@
 
 import { redirect } from 'next/navigation';
 
-import { Column } from '@/components/column';
-import { AuthProvider } from '@/components/providers/auth-provider';
 import { getCurrentProfile } from '@/lib/queries/profile';
 import { getUser } from '@/utils/get-user';
+
+import { Column } from '@/components/column';
+import { AuthProvider } from '@/components/providers/auth-provider';
 
 interface ProtectedPageProps {}
 

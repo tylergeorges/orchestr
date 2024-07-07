@@ -14,13 +14,11 @@ export interface ModalData {
 type Subscriber = (data: ModalData) => void;
 
 class System {
-  // subscribers: Subscriber[];
   subscribers: Set<Subscriber>;
 
   modals: ModalData[];
 
   constructor() {
-    // this.subscribers = [];
     this.subscribers = new Set();
     this.modals = [];
   }
@@ -66,12 +64,12 @@ class System {
     if (!this.modals.length) {
       return;
     }
-    
+
     if (typeof id !== 'undefined') {
       const modalIdx = this.modals.findIndex(m => m.id === id);
-      
+
       const modal = this.modals[modalIdx];
-      
+
       if (!modal) {
         return;
       }

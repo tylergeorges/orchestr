@@ -94,10 +94,6 @@ const config: Config = {
         ]
       },
 
-      backgroundImage: {
-        star: "url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20viewBox%3D%220%200%20281%20281%22%3E%3Cpath%20d%3D%22M%20140.5%2013.417%20L%20181.792%2097.083%20L%20274.123%20110.5%20L%20207.312%20175.625%20L%20223.084%20267.583%20L%20140.5%20224.167%20L%2057.916%20267.583%20L%2073.688%20175.625%20L%206.877%20110.5%20L%2099.208%2097.083%20Z%22%20fill%3D%22rgb(255%2C%200%2C%200)%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E')"
-      },
-
       fontFamily: {
         sans: ['var(--font-geist-sans)', ...fontFamily.sans],
         mono: ['var(--font-geist-mono)', ...fontFamily.mono]

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
+import { tv, VariantProps } from 'tailwind-variants';
 
 import { cn } from '@/utils/cn';
-import { tv, VariantProps } from 'tailwind-variants';
 
 export const inputVariants = tv({
   base: 'focus- flex h-10 w-full gap-2 rounded-sm bg-input px-2 py-3.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',

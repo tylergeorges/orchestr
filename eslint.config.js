@@ -20,52 +20,9 @@ let jsConfig = {
   },
 
   rules: {
-    // ...js.configs.recommended.rules,
     'arrow-parens': ['off'],
-    // 'comma-dangle': ['warn', 'never'],
-    // "comma-dangle": ["error", "always-multiline"],
     curly: 'off',
-    // 'function-paren-newline': ['error', 'consistent'],
-    // 'implicit-arrow-linebreak': ['error', 'beside'],
-    // 'no-confusing-arrow': [
-    //   'error',
-    //   {
-    //     allowParens: true
-    //   }
-    // ],
-    // 'no-console': [
-    //   'error',
-    //   {
-    //     allow: ['warn', 'error', 'info']
-    //   }
-    // ],
-    // 'no-multiple-empty-lines': [
-    //   'error',
-    //   {
-    //     max: 1
-    //   }
-    // ],
 
-    // 'no-unused-expressions': [
-    //   'error',
-    //   {
-    //     allowTernary: true
-    //   }
-    // ],
-    // 'object-curly-newline': [
-    //   'error',
-    //   {
-    //     consistent: true,
-    //     multiline: true
-    //   }
-    // ],
-
-    // 'object-curly-spacing': ['error', 'always'],
-    // 'quote-props': ['off'],
-    // // "quote-props": ["error", "consistent"],
-    // quotes: ['off'],
-    // // quotes: ["error", "double"],
-    // 'require-atomic-updates': ['error'],
     'no-console': 'off'
   }
 };
@@ -123,12 +80,6 @@ let reactConfig = {
 
     'react/react-in-jsx-scope': 'off'
   }
-
-  // settings: {
-  //   react: {
-  //     version: "detect" // You can add this if you get a warning about the React version when you lint
-  //   }
-  // }
 };
 
 /** @type {import('eslint').Linter.FlatConfig} */
@@ -147,7 +98,6 @@ let nextConfig = {
   },
 
   rules: {
-    // ...nextPlugin.configs.recommended.rules,
     ...nextPlugin.configs['core-web-vitals'].rules
   }
 };
@@ -166,7 +116,18 @@ let overridesConfigs = [
       'no-undef': 'off'
     },
 
-    ignores: ['.next/*', 'next.config.js', '**/*.js', '**/*.config.js']
+    ignores: [
+      '.next/*',
+
+      // '**/*.js',
+      // '**/*.config.js',
+
+      // '**/*.mjs',
+      // '**/*.config.mjs',
+
+      // '**/*.cjs',
+      // '**/*.config.cjs'
+    ]
   }
 ];
 

@@ -39,7 +39,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ModalRenderer />
           <Toaster
             toastOptions={{
-              // unstyled: true,
               classNames: {
                 toast: cn('flex items-center rounded-md border-none text-primary'),
 

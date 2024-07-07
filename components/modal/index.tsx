@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ModalSystem, type ModalContent, type ModalData } from './system';
 import { cn } from '@/utils/cn';
 import { useKey } from '@/hooks/use-key';
+import { ModalSystem, type ModalContent, type ModalData } from './system';
 
 interface ModalProps {
   modal: ModalData;
@@ -22,10 +22,8 @@ const Modal = ({ modal, removeModal, children }: ModalProps) => {
   useEffect(() => {
     setIsVisible(true);
 
-    // if (visible) {
     document.body.style.overflowY = 'hidden';
     document.body.style.marginRight = '17px';
-    // }
 
     return () => {
       clearTimeout(deleteModalTimeoutRef.current);
@@ -99,7 +97,6 @@ export const ModalRenderer = () => {
           return;
         }
 
-        // flushSync(() => {
         setModals(modals => {
           const modalExistsIndex = modals.findIndex(m => m.id === data.id);
 
@@ -126,11 +123,7 @@ export const ModalRenderer = () => {
   if (!modals.length) return null;
 
   return (
-    <section
-      // className="w-full h-full flex items-center justify-center absolute"
-      aria-label="Notifications alt+T"
-      tabIndex={-1}
-    >
+    <section aria-label="Notifications alt+T" tabIndex={-1}>
       <div tabIndex={-1} className="absolute h-screen w-full">
         <div className="fixed z-10 flex h-full w-full items-center justify-center overflow-hidden">
           {modals.map(modal => (

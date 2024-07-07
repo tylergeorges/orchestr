@@ -1,6 +1,5 @@
 import { useUser } from '@/components/providers/auth-provider';
 import { Avatar, AvatarFallback, AvatarImage, AvatarVariants } from '@/components/ui/avatar';
-import { getCurrentProfile } from '@/lib/queries/profile';
 
 interface UserAvatarProps extends AvatarVariants {
   avatar?: string;

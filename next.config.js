@@ -10,10 +10,11 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com'
       }
     ]
-  }
+  },
 
-  // transpilePackages: ['lucide-react'] // add this
+  transpilePackages: ['lucide-react']
 
+  // typedRoutes doesn't work with turbo
   // experimental: {
   //   typedRoutes: true
   // }

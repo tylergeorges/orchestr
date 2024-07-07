@@ -1,7 +1,7 @@
 'use client';
 
-import { ButtonLink, ButtonVariants } from '@/components/ui/button';
 import { useCurrentPath } from '@/hooks/use-current-path';
+import { ButtonLink, ButtonVariants } from '@/components/ui/button';
 
 interface LoginButtonProps extends ButtonVariants {}
 
