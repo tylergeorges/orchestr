@@ -1,6 +1,4 @@
 'use client';
-
-import { useCallbackRef } from '@/hooks/use-callback-ref';
 // this hook comes from - https://usehooks-ts.com/react-hook/use-event-listener
 
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect';

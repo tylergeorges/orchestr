@@ -11,14 +11,7 @@ export const LoginButton = ({ ...props }: LoginButtonProps) => {
   if (path === 'login') return null;
 
   return (
-    <ButtonLink
-      href="/login"
-      color="brand"
-      variant="outline"
-      className="group"
-      size="md"
-      {...props}
-    >
+    <ButtonLink href="/login" variant="ghost" className="group" size="md" {...props}>
       Login
     </ButtonLink>
   );

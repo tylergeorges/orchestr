@@ -69,13 +69,6 @@
     --brand: 142.1 70.6% 45.3%;
     --brand-foreground: var(--gray-950);
 
-    --brand-500: 245 82% 67%;
-    --brand-600: 250 74% 59%;
-    --brand-700: 251 57% 51%;
-    --brand-800: 250 54% 41%;
-    --brand-900: 249 46% 34%;
-    --brand-950: 250 47% 20%;
-
     --muted: var(--gray-600);
     --muted-foreground: var(--gray-400);
 
@@ -103,6 +96,10 @@
 @layer base {
   * {
     @apply box-border border-border;
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
   }
 
   body {

@@ -14,6 +14,8 @@ export const getProfile = cache((client: TypedSupabaseClient, userId: string) =>
 });
 
 export const getCurrentProfile = cache(async (userId?: string) => {
+  if (!userId) return;
+
   const client = await createClient();
 
   const {
@@ -25,7 +27,7 @@ export const getCurrentProfile = cache(async (userId?: string) => {
   const profile = await client
     .from('profiles')
     .select('username, display_name, created_at, avatar, id, email')
-    .eq('id', userId ?? user.id)
+    .eq('id', userId)
     .throwOnError()
     .single();
 

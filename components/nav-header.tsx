@@ -7,19 +7,22 @@ import { Header } from '@/components/ui/header';
 import { Icons } from '@/components/icons';
 import { Row } from '@/components/row';
 import { Link } from '@/components/ui/link';
-import { UserAvatar } from '@/components/user-avatar';
 import { LoginButton } from '@/components/login-button';
 
+import { UserDropdown } from '@/components/user-dropdown';
+
 export const NavHeader = async () => {
-  const { data } = await getUser();
-  const profile = await getCurrentProfile(data?.user?.id);
+  const {
+    data: { user }
+  } = await getUser();
+  const profile = await getCurrentProfile(user?.id);
 
   return (
     <Header>
       <Row className="w-full gap-4">
         <Link href="/" className="group relative items-center gap-2 horizontal to-md:flex-1">
           <span className="group relative flex items-center justify-center overflow-hidden rounded-md text-primary">
-            <Icons.orchestr className="size-8 text-current" />
+            <Icons.orchestr className="size-8 text-brand" />
           </span>
 
           <h1 className="group -translate-x-1/2 text-xl font-bold opacity-0 transition duration-300 sm:translate-x-0 sm:opacity-100">
@@ -28,7 +31,7 @@ export const NavHeader = async () => {
         </Link>
 
         <div className="flex flex-1 items-center justify-end gap-2">
-          {profile ? (
+          {user && profile ? (
             <>
               {/* <span className="flex-1 items-center text-sm font-medium capitalize text-primary horizontal center-h to-md:hidden">
                 <CurrentPath />
@@ -46,7 +49,7 @@ export const NavHeader = async () => {
                 className="size-5 cursor-pointer text-muted transition hover:text-muted-foreground to-md:hidden"
               /> */}
 
-              <UserAvatar size="lg" avatar={profile?.avatar} />
+              <UserDropdown profile={profile} />
             </>
           ) : (
             <>

@@ -8,14 +8,15 @@ const buttonVariants = tv({
   base: cn(
     'relative inline-flex items-center whitespace-nowrap rounded-md px-4 py-2 text-center text-sm transition duration-300 ease-out',
     'outline-none ring-border focus-visible:ring-2',
-    'items-center justify-center overflow-hidden align-middle font-bold disabled:cursor-not-allowed disabled:opacity-50'
+    'items-center justify-center overflow-hidden align-middle font-semibold disabled:cursor-not-allowed disabled:opacity-50'
   ),
 
   variants: {
     color: {
-      default: 'bg-secondary text-secondary-foreground hover:bg-accent',
+      default: 'bg-secondary text-primary hover:bg-accent',
 
-      primary: 'bg-primary text-primary-foreground hover:bg-primary/80',
+      primary:
+        'bg-primary text-primary-foreground selection:bg-primary-foreground selection:text-primary hover:bg-primary/80',
 
       brand: 'bg-brand text-brand-foreground ring-brand/70 hover:bg-brand/80',
 
@@ -30,7 +31,7 @@ const buttonVariants = tv({
       outline:
         'border border-border bg-transparent text-primary hover:bg-secondary hover:text-secondary-foreground',
 
-      ghost: 'border-none bg-transparent text-secondary-foreground hover:bg-muted',
+      ghost: 'border-none bg-transparent text-primary hover:bg-accent',
 
       transparent: 'bg-transparent'
     },
@@ -86,8 +87,7 @@ const buttonVariants = tv({
     {
       color: 'default',
       variant: 'outline',
-      className:
-        'border border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground'
+      className: 'border border-accent bg-transparent text-primary hover:bg-accent'
     },
 
     {
@@ -98,7 +98,8 @@ const buttonVariants = tv({
     {
       color: 'primary',
       variant: 'ghost',
-      className: 'bg-transparent text-primary hover:bg-primary hover:text-primary-foreground'
+      className:
+        'bg-transparent text-primary-foreground hover:bg-primary hover:text-primary-foreground'
     },
     {
       color: 'destructive',
@@ -109,7 +110,7 @@ const buttonVariants = tv({
     {
       color: 'default',
       variant: 'ghost',
-      className: 'bg-transparent text-secondary hover:bg-secondary hover:text-secondary-foreground'
+      className: 'bg-transparent text-primary hover:bg-accent'
     }
   ]
 });

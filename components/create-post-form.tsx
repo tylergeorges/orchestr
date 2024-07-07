@@ -13,7 +13,8 @@ import { Column } from '@/components/column';
 import { Row } from '@/components/row';
 import { PostDivider } from '@/components/post';
 import { UserAvatar } from '@/components/user-avatar';
-import { Input } from '@/components/ui/input';
+import { MagicTextArea } from '@/components/ui/input';
+import { Icons } from '@/components/icons';
 
 interface CreatePostFormProps {
   parentId?: string | null;
@@ -28,17 +29,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
   const { mutate: createPostMutation } = useCreatePost();
   const { mutate: createReplyMutation } = useCreateReply();
 
-  const createPost = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const target = e.currentTarget;
-
-    if (!target) return;
-
-    const form = new FormData(target);
-
-    const text = form.get('Post Input') as string | null;
-
+  const createPost = (text: string) => {
     if (!text || !text.trim()) return;
 
     if (parentId) {
@@ -68,30 +59,34 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
         profiles: profile
       });
     }
-
-    target.reset(); // clear input
   };
 
   return (
     <Column className="w-full">
-      <Row className="relative w-full gap-4 p-6">
+      <Row className="relative w-full gap-4 border-y px-6 py-4">
         <UserAvatar avatar={profile.avatar} size="xl" />
 
-        <form onSubmit={createPost} id="post-form" className="relative flex-1">
+        <form id="post-form" name="post-form" className="relative flex-1">
           <Column className="relative w-full flex-1 gap-2">
             <div className="relative w-full flex-1">
-              <Input
+              <MagicTextArea
                 name="Post Input"
-                type="text"
+                form="post-form"
+                onSubmit={createPost}
+                variant="ghost"
                 placeholder="What's on your mind?"
                 className="mb border-0 text-base focus-visible:ring-0"
               />
             </div>
 
             <Row className="justify-between center-v">
-              <Button color="primary" type="submit">
-                Post
-              </Button>
+              <Icons.attachment className="size-5 text-muted" />
+
+              <div className="">
+                <Button color="primary" type="submit" size="sm">
+                  Post
+                </Button>
+              </div>
             </Row>
           </Column>
         </form>

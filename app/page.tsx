@@ -29,11 +29,9 @@ export default function Index() {
 
         <Row className="mt-5 animate-fade-up gap-6 center-h animate-delay-150">
           <ButtonLink href="/login" color="primary" className="group" size="xl">
-            <span className="transition duration-300 ease-in-out group-hover:-translate-x-2">
-              Get Started
-            </span>
+            <span className="transition duration-300 group-hover:-translate-x-2">Get Started</span>
 
-            <Icons.rightArrow className="absolute right-1 size-5 translate-x-full text-current opacity-0 transition duration-300 ease-in-out group-hover:-translate-x-1 group-hover:opacity-100" />
+            <Icons.rightArrow className="absolute right-1 size-5 translate-x-full text-current opacity-0 transition duration-300 group-hover:-translate-x-1 group-hover:opacity-100" />
           </ButtonLink>
 
           <ButtonLink
