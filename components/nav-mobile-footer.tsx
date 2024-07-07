@@ -1,7 +1,9 @@
 'use client';
+
+import { useCurrentPath } from '@/hooks/use-current-path';
+
 import { Footer } from '@/components/ui/footer';
 import { NavIcon } from '@/components/ui/link';
-import { useCurrentPath } from '@/hooks/use-current-path';
 
 export const NavMobileFooter = () => {
   const pathname = useCurrentPath();
@@ -11,8 +13,8 @@ export const NavMobileFooter = () => {
   return (
     <Footer>
       <NavIcon href="/home" icon="home" />
-      <NavIcon href="/activity" icon="bell" />
-      <NavIcon href="/messages" icon="inbox" />
+      {/* <NavIcon href="/activity" icon="bell" />
+      <NavIcon href="/messages" icon="inbox" /> */}
     </Footer>
   );
 };

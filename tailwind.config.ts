@@ -111,11 +111,11 @@ const config: Config = {
         },
 
         pop: {
-          from: { transform: 'scale(0.6)', opacity: '0' },
+          from: { transform: 'scale(0.6)' },
 
           '60%': { transform: 'scale(1.1)' },
 
-          '100%': { transform: 'scale(1)', opacity: '1' }
+          '100%': { transform: 'scale(1)' }
         },
 
         'music-pulse': {

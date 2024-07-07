@@ -11,7 +11,8 @@
     "codegen": "npx supabase gen types typescript --linked  > lib/types/supabase.ts && npx better-supabase-types -i lib/types/supabase.ts -f",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "clean": "if exist dist rmdir /Q /S node_modules"
+    "clean": "if exist dist rmdir /Q /S node_modules",
+    "analyze": "cross-env ANALYZE=true next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.7.0",
@@ -22,12 +23,11 @@
     "@supabase/supabase-js": "^2.43.1",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.40.1",
-    "@types/eslint__js": "^8.42.3",
     "autoprefixer": "10.4.17",
     "dayjs": "^1.11.11",
     "drizzle-orm": "^0.31.0",
     "geist": "^1.2.1",
-    "lucide-react": "^0.379.0",
+    "lucide-react": "^0.400.0",
     "next": "latest",
     "postcss": "8.4.33",
     "postgres": "^3.4.4",
@@ -39,7 +39,7 @@
     "server-only": "^0.0.1",
     "sonner": "^1.4.41",
     "tailwind-variants": "^0.2.1",
-    "tailwindcss": "3.4.3",
+    "tailwindcss": "3.4.4",
     "tailwindcss-animated": "^1.1.2",
     "typescript": "5.4.5",
     "use-context-selector": "^2.0.0",
@@ -51,9 +51,11 @@
   "devDependencies": {
     "@eslint/compat": "^1.0.1",
     "@eslint/js": "^9.3.0",
+    "@next/bundle-analyzer": "^14.2.4",
     "@next/eslint-plugin-next": "^14.2.3",
     "@tailwindcss/typography": "^0.5.13",
     "@types/eslint": "^8.56.10",
+    "@types/eslint__js": "^8.42.3",
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
@@ -61,6 +63,7 @@
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "drizzle-kit": "^0.22.8",
     "encoding": "^0.1.13",
     "eslint": "^9.3.0",
@@ -80,11 +83,5 @@
     "prettier-plugin-tailwindcss": "^0.6.2",
     "tailwind-merge": "^2.3.0",
     "typescript-eslint": "^7.11.0"
-  },
-  "postcss": {
-    "plugins": {
-      "tailwindcss": {},
-      "autoprefixer": {}
-    }
   }
 }

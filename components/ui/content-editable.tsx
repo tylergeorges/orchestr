@@ -2,10 +2,10 @@
 
 import { forwardRef, useRef } from 'react';
 
-import type { InputVariants } from '@/components/ui/input';
-
-import { inputVariants } from '@/components/ui/input';
 import { cn } from '@/utils/cn';
+
+import type { InputVariants } from '@/components/ui/input';
+import { inputVariants } from '@/components/ui/input';
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect';
 
 type BaseDivProps = ElementPropsWithVariants<ElementProps<'div'>, InputVariants>;

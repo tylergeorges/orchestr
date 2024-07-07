@@ -4,15 +4,16 @@ import { v4 as uuid } from 'uuid';
 
 import { generateTimestamp } from '@/utils/generate-timestamp';
 
-import { Button } from '@/components/ui/button';
-import { ContentEditable } from '@/components/ui/content-editable';
-import { useUser } from '@/components/providers/auth-provider';
+import { useCreateReply } from '@/hooks/use-create-reply';
 import { useCreatePost } from '@/hooks/use-create-post';
+import { useUser } from '@/components/providers/auth-provider';
+
+import { Button } from '@/components/ui/button';
 import { Column } from '@/components/column';
 import { Row } from '@/components/row';
 import { PostDivider } from '@/components/post';
-import { useCreateReply } from '@/hooks/use-create-reply';
 import { UserAvatar } from '@/components/user-avatar';
+import { Input } from '@/components/ui/input';
 
 interface CreatePostFormProps {
   parentId?: string | null;
@@ -24,62 +25,76 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
     profile
   } = useUser();
 
-  const { mutateAsync: createPostMutation } = useCreatePost();
-  const { mutateAsync: createReplyMutation } = useCreateReply();
+  const { mutate: createPostMutation } = useCreatePost();
+  const { mutate: createReplyMutation } = useCreateReply();
 
-  const createPost = async (text: string) => {
-    if (!text.trim()) return;
+  const createPost = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const target = e.currentTarget;
+
+    if (!target) return;
+
+    const form = new FormData(target);
+
+    const text = form.get('Post Input') as string | null;
+
+    if (!text || !text.trim()) return;
 
     if (parentId) {
-      await createReplyMutation({
+      createReplyMutation({
         id: uuid(),
         author_id: userId,
         content: text,
         created_at: generateTimestamp(),
         like_count: 0,
         reply_count: 0,
-        reply_to: parentId
+        reply_to: parentId,
+
+        // @ts-expect-error - profiles is defined client side, optimistic updates will error without
+        profiles: profile
       });
     } else {
-      await createPostMutation({
+      createPostMutation({
         id: uuid(),
         author_id: userId,
         content: text,
         created_at: generateTimestamp(),
         like_count: 0,
         reply_count: 0,
-        // is_liked: false,
-        reply_to: null
+        reply_to: null,
+
+        // @ts-expect-error - profiles is defined client side, optimistic updates will error without
+        profiles: profile
       });
     }
+
+    target.reset(); // clear input
   };
 
   return (
     <Column className="w-full">
       <Row className="relative w-full gap-4 p-6">
-        {/* <Avatar size="xl">
-          {profile.avatar ? (
-            <AvatarImage alt="" src={profile.avatar} />
-          ) : (
-            <AvatarFallback className="bg-brand" />
-          )}
-        </Avatar> */}
-
         <UserAvatar avatar={profile.avatar} size="xl" />
 
-        <Column className="relative w-full flex-1 gap-2">
-          <div className="relative w-full flex-1">
-            <ContentEditable
-              onSubmit={createPost}
-              placeholder="What's on your mind?"
-              className="border-0 text-base focus-visible:ring-0"
-            />
-          </div>
+        <form onSubmit={createPost} id="post-form" className="relative flex-1">
+          <Column className="relative w-full flex-1 gap-2">
+            <div className="relative w-full flex-1">
+              <Input
+                name="Post Input"
+                type="text"
+                placeholder="What's on your mind?"
+                className="mb border-0 text-base focus-visible:ring-0"
+              />
+            </div>
 
-          <Row className="justify-between center-v">
-            <Button color="primary">Post</Button>
-          </Row>
-        </Column>
+            <Row className="justify-between center-v">
+              <Button color="primary" type="submit">
+                Post
+              </Button>
+            </Row>
+          </Column>
+        </form>
       </Row>
 
       <PostDivider />
