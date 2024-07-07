@@ -31,7 +31,7 @@ export const useUpdatePostLikes = (key: string) => {
       return { previousPosts, updatedPosts };
     },
 
-    onError: (err, updatedPost, context) => {
+    onError: (err, _, context) => {
       const queryKey = [key];
 
       queryClient.setQueryData(queryKey, context?.previousPosts);

@@ -18,7 +18,7 @@ export const useCreateReply = () => {
     },
 
     // If the mutation fails, use the context we returned above
-    onError: (err, updatedPost, context) => {
+    onError: (err, _, context) => {
       queryClient.setQueryData(['getReplies'], context?.previousPosts);
 
       toast.error(err.message);

@@ -6,6 +6,8 @@ interface UserAvatarProps extends AvatarVariants {
 }
 
 export const UserAvatar = ({ avatar, size }: UserAvatarProps) => {
+  const user = useUser();
+
   if (avatar) {
     return (
       <Avatar size={size}>
@@ -14,14 +16,12 @@ export const UserAvatar = ({ avatar, size }: UserAvatarProps) => {
     );
   }
 
-  const { profile } = useUser();
-
-  if (!profile) return null;
+  if (!user) return null;
 
   return (
     <Avatar size={size}>
-      {profile.avatar ? (
-        <AvatarImage alt="" src={profile.avatar} />
+      {user.profile.avatar ? (
+        <AvatarImage alt="" src={user.profile.avatar} />
       ) : (
         <AvatarFallback className="bg-brand" />
       )}

@@ -21,16 +21,19 @@ interface CreatePostFormProps {
 }
 
 export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
-  const {
-    user: { id: userId },
-    profile
-  } = useUser();
+  const userData = useUser();
 
   const { mutate: createPostMutation } = useCreatePost();
   const { mutate: createReplyMutation } = useCreateReply();
 
+  if (!userData) return;
+
+  const { profile } = userData;
+
   const createPost = (text: string) => {
     if (!text || !text.trim()) return;
+
+    const userId = profile.id;
 
     if (parentId) {
       createReplyMutation({

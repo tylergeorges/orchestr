@@ -61,10 +61,12 @@ const twitterFormat = (instance: dayjs.Dayjs) => {
   }
 };
 
-export default (o: unknown, c: typeof dayjs.Dayjs) => {
+const dayjsTwitterPlugin = (o: unknown, c: typeof dayjs.Dayjs) => {
   const proto = c.prototype;
 
   proto.twitter = function () {
     return twitterFormat(this);
   };
 };
+
+export default dayjsTwitterPlugin;
