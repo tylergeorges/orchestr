@@ -40,15 +40,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Toaster
             toastOptions={{
               classNames: {
-                toast: cn('flex items-center rounded-md border-none text-primary'),
+                toast: 'flex items-center rounded-md border-none text-primary',
 
-                success: cn('bg-success text-primary'),
+                success: 'bg-success text-primary',
 
-                error: cn('bg-destructive text-destructive-foreground'),
+                error: 'bg-destructive text-destructive-foreground',
+
+                warning: 'bg-warning text-warning-foreground',
 
                 title: 'font-bold',
 
-                description: cn('text-current/90')
+                description: 'text-current/90'
               }
             }}
           />

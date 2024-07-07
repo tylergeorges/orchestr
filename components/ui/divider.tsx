@@ -10,7 +10,9 @@ export const Divider = ({
     </div>
 
     <div className="relative flex justify-center text-sm">
-      <span className={cn('bg-border px-2 text-sm font-bold text-muted-foreground', className)}>
+      <span
+        className={cn('bg-background px-2 text-sm font-medium text-muted-foreground', className)}
+      >
         {children}
       </span>
     </div>

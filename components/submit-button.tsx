@@ -16,12 +16,12 @@ export function SubmitButton({ children, loading, ...props }: Props) {
 
   return (
     <Button
-      {...props}
       fill
       type="submit"
       disabled={loading || pending}
       aria-disabled={loading || pending}
       className="justify-center"
+      {...props}
     >
       {isPending ? <Icons.spinner className="mr-2 h-4 w-4 animate-spin" /> : children}
     </Button>

@@ -13,14 +13,14 @@ const buttonVariants = tv({
 
   variants: {
     color: {
-      default: 'bg-secondary text-primary hover:bg-accent',
+      default: 'bg-secondary text-primary hover:enabled:bg-accent',
 
       primary:
-        'bg-primary text-primary-foreground selection:bg-primary-foreground selection:text-primary hover:bg-primary/80',
+        'bg-primary text-primary-foreground selection:bg-primary-foreground selection:text-primary hover:enabled:bg-primary/80',
 
-      brand: 'bg-brand text-brand-foreground ring-brand/70 hover:bg-brand/80',
+      brand: 'bg-brand text-brand-foreground ring-brand/70 hover:enabled:bg-brand/80',
 
-      destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80'
+      destructive: 'bg-destructive text-destructive-foreground hover:enabled:bg-destructive/80'
     },
 
     variant: {
