@@ -20,9 +20,6 @@ export default function Index() {
                 <Icons.music1 className="size-8 text-brand md:size-10 lg:size-12 [&>circle]:fill-current" />
               </span>
             </span>
-
-
-
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import { tv, type VariantProps } from 'tailwind-variants';
 
 import { cn } from '@/utils/cn';
+import Link from 'next/link';
 
 const buttonVariants = tv({
   base: cn(
@@ -135,18 +136,18 @@ export const Button = forwardRef<HTMLButtonElement, React.PropsWithChildren<Butt
 
 Button.displayName = 'Button';
 
-interface ButtonLinkProps
-  extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'color'>,
-    ButtonVariants {
-  active?: boolean;
-}
+type ButtonLinkProps = Omit<React.ComponentProps<typeof Link>, 'color'> &
+  ButtonVariants & {
+    active?: boolean;
+    className?: string;
+  };
 
 export const ButtonLink = forwardRef<HTMLAnchorElement, React.PropsWithChildren<ButtonLinkProps>>(
   ({ className, children, color, active, variant, fill, round, size, ...props }, ref) => {
     const watchActiveState = typeof active !== 'undefined';
 
     return (
-      <a
+      <Link
         {...props}
         className={cn(
           'cursor-pointer',
@@ -162,7 +163,7 @@ export const ButtonLink = forwardRef<HTMLAnchorElement, React.PropsWithChildren<
         ref={ref}
       >
         {children}
-      </a>
+      </Link>
     );
   }
 );
