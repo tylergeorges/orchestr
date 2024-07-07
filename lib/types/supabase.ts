@@ -151,6 +151,35 @@ export type Database = {
           }
         ];
       };
+      teams: {
+        Row: {
+          created_at: string;
+          id: string;
+          name: string;
+          owner_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          name?: string;
+          owner_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          name?: string;
+          owner_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'teams_owner_id_fkey';
+            columns: ['owner_id'];
+            isOneToOne: false;
+            referencedRelation: 'profiles';
+            referencedColumns: ['id'];
+          }
+        ];
+      };
     };
     Views: {
       posts_with_likes: {
@@ -498,6 +527,10 @@ export type Database = {
           updated_at: string;
         }[];
       };
+      operation: {
+        Args: Record<PropertyKey, never>;
+        Returns: string;
+      };
       search: {
         Args: {
           prefix: string;
@@ -621,6 +654,10 @@ export type Profiles = Database['public']['Tables']['profiles']['Row'];
 export type InsertProfiles = Database['public']['Tables']['profiles']['Insert'];
 export type UpdateProfiles = Database['public']['Tables']['profiles']['Update'];
 
+export type Teams = Database['public']['Tables']['teams']['Row'];
+export type InsertTeams = Database['public']['Tables']['teams']['Insert'];
+export type UpdateTeams = Database['public']['Tables']['teams']['Update'];
+
 // Views
 export type PostsWithLikes = Database['public']['Views']['posts_with_likes']['Row'];
 
@@ -680,6 +717,9 @@ export type ArgsListObjectsWithDelimiter =
   Database['storage']['Functions']['list_objects_with_delimiter']['Args'];
 export type ReturnTypeListObjectsWithDelimiter =
   Database['storage']['Functions']['list_objects_with_delimiter']['Returns'];
+
+export type ArgsOperation = Database['storage']['Functions']['operation']['Args'];
+export type ReturnTypeOperation = Database['storage']['Functions']['operation']['Returns'];
 
 export type ArgsSearch = Database['storage']['Functions']['search']['Args'];
 export type ReturnTypeSearch = Database['storage']['Functions']['search']['Returns'];

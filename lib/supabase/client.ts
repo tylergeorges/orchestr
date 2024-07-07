@@ -2,15 +2,13 @@ import { useMemo } from 'react';
 import { createBrowserClient } from '@supabase/ssr';
 
 import type { Database } from '@/lib/types/supabase';
-import type { TypedSupabaseClient } from '@/lib/types';
 import { env } from '@/lib/env';
+import { TypedSupabaseClient } from '@/lib/types';
 
-let client: TypedSupabaseClient;
+let client: TypedSupabaseClient | undefined;
 
-const createClient = () => {
-  if (client) {
-    return client;
-  }
+const getSupabaseBrowserClient = () => {
+  if (client) return client;
 
   client = createBrowserClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
@@ -21,5 +19,5 @@ const createClient = () => {
 };
 
 export const useSupabaseBrowser = () => {
-  return useMemo(createClient, []);
+  return useMemo(getSupabaseBrowserClient, []);
 };

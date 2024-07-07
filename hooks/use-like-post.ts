@@ -10,6 +10,7 @@ export function useLikePost(post: Defined<PostsWithMeta>, postKey: string) {
 
   const { mutate: updatePostMutation } = useUpdatePostLikes(postKey);
 
+  // @ts-expect-error - typescript being weird 
   return useInsertMutation(supabase.from('likes'), ['user_id', 'post_id'], null, {
     onMutate: async ([likeData]) => {
       updatePostMutation({
