@@ -46,6 +46,7 @@
     --gray-900: 240deg 5.9% 12%;
     --gray-850: 240deg 5.9% 13%;
     --gray-800: 240deg 5.9% 19%;
+    --gray-750: 240deg 5.9% 23%;
     --gray-700: 240deg 5.9% 32%;
     --gray-600: 240deg 5.9% 39%;
     --gray-500: 240deg 5.9% 48%;
@@ -85,8 +86,8 @@
     --card: var(--gray-900); /** 950 */
     --card-foreground: var(--primary);
 
-    --border: var(--secondary); /** 800 */
-    --input: var(--gray-900);
+    --border: var(--gray-800); /** 800 */
+    --input: var(--secondary);
 
     --accent: var(--gray-800); /** 800 */
     --accent-foreground: var(--primary); /** 50 */

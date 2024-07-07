@@ -4,11 +4,11 @@ import { cn } from '@/utils/cn';
 import { tv, VariantProps } from 'tailwind-variants';
 
 export const inputVariants = tv({
-  base: 'focus- flex h-10 w-full gap-2 rounded-sm bg-accent px-2 py-3.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
+  base: 'focus- flex h-10 w-full gap-2 rounded-sm bg-input px-2 py-3.5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
 
   variants: {
     variant: {
-      default: 'focus:ring-2 focus-visible:ring-brand',
+      default: 'focus-visible:ring-2 focus-visible:ring-border',
 
       ghost: 'bg-transparent focus:border-brand'
     },
@@ -17,6 +17,10 @@ export const inputVariants = tv({
       default: '',
       destructive: 'bg-destructive/10 ring-1 ring-destructive/70 placeholder:text-destructive/70'
     }
+  },
+
+  defaultVariants: {
+    variant: 'default'
   }
 });
 

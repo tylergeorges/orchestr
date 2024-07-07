@@ -6,8 +6,8 @@ import Link from 'next/link';
 
 const buttonVariants = tv({
   base: cn(
-    'relative inline-flex items-center whitespace-nowrap rounded-md px-4 py-2 text-center text-sm transition duration-200 ease-out',
-    'outline-none ring-ring focus-visible:ring-2',
+    'relative inline-flex items-center whitespace-nowrap rounded-md px-4 py-2 text-center text-sm transition duration-300 ease-out',
+    'outline-none ring-border focus-visible:ring-2',
     'items-center justify-center overflow-hidden align-middle font-bold disabled:cursor-not-allowed disabled:opacity-50'
   ),
 
@@ -17,7 +17,7 @@ const buttonVariants = tv({
 
       primary: 'bg-primary text-primary-foreground hover:bg-primary/80',
 
-      brand: 'bg-brand text-brand-foreground hover:bg-brand/80',
+      brand: 'bg-brand text-brand-foreground hover:bg-brand/80 ring-brand/70',
 
       destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/80'
     },
@@ -30,7 +30,7 @@ const buttonVariants = tv({
       outline:
         'border border-border bg-transparent text-primary hover:bg-secondary hover:text-secondary-foreground',
 
-      ghost: 'bg-transparent text-secondary-foreground hover:bg-muted',
+      ghost: 'border-none bg-transparent text-secondary-foreground hover:bg-muted',
 
       transparent: 'bg-transparent'
     },
