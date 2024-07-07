@@ -48,10 +48,14 @@ interface PostLikeButtonProps {
 }
 
 export const LikeButton = ({ post, queryKey }: PostLikeButtonProps) => {
-  const { user } = useUser();
+  const userData = useUser();
 
   const { mutate: addLike } = useLikePost(post, queryKey);
   const { mutate: removeLike } = useRemoveLike(post, queryKey);
+
+  if (!userData) return;
+
+  const { user } = userData;
 
   const likePost = (e: React.SyntheticEvent) => {
     e.stopPropagation();

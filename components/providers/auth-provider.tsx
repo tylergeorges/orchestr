@@ -26,9 +26,5 @@ export const AuthProvider = ({ children, user, profile }: WithChildren<AuthProvi
 export const useUser = () => {
   const user = useContextSelector(AuthContext, v => v);
 
-  if (!user) {
-    throw Error('User context not set.');
-  }
-
   return user;
 };
