@@ -6,7 +6,6 @@ import {
   EmptyDivider,
   LikeButton,
   Post,
-  PostButton,
   PostButtonWrapper,
   PostContent,
   PostCreatedAt,
@@ -55,10 +54,6 @@ export const ExpandedPost = ({ post, queryKey }: ExpandedPostProps) => {
             <EmptyDivider />
 
             <PostButtonWrapper className="mt-2">
-              <PostButton color="blue-500" icon="message" isActive={false}>
-                {post.reply_count}
-              </PostButton>
-
               <LikeButton post={post} queryKey={queryKey} />
             </PostButtonWrapper>
           </Column>

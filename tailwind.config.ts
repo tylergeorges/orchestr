@@ -141,8 +141,10 @@ const config: Config = {
 
         // Dropdown menu
         'scale-in': {
-          '0%': { opacity: '0', transform: 'scale(0)' },
-          '100%': { opacity: '1', transform: 'scale(1)' }
+          from: { opacity: '0', transform: 'scale(0)' },
+
+          '30%': { opacity: '0' },
+          to: { opacity: '1', transform: 'scale(1)' }
         },
 
         'slide-down': {
@@ -263,7 +265,7 @@ const config: Config = {
 
         fadeIn: 'fadeIn 500ms',
         fadeUp: 'fadeUp 1.5s',
-        modalFadeIn: 'modalFadeIn 200ms+',
+        modalFadeIn: 'modalFadeIn 200ms',
 
         // Dropdown menu
         'scale-in': 'scale-in 0.6s cubic-bezier(0.16, 1, 0.3, 1)',

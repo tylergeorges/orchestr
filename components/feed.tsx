@@ -21,6 +21,7 @@ import {
 import { Column } from '@/components/column';
 import { Row } from '@/components/row';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Link } from '@/components/ui/link';
 
 type PostsQueryType = Parameters<typeof usePostsQuery>;
 
@@ -41,17 +42,24 @@ export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
   const posts = (data as Defined<PostsWithMeta & PostsWithLikes>[]) ?? [];
 
   return (
-    <Column className="flex-1">
+    <Column className="relative w-full flex-1">
       {posts.map(post => (
         <Post post={post} key={post.id}>
           <Row className="h-full flex-1 gap-4 p-6">
-            <Avatar size="xl" className="select-none">
-              <AvatarImage
-                className="pointer-events-none select-none"
-                alt=""
-                src={post.profiles.avatar}
-              />
-            </Avatar>
+            <Link
+              href={`${post.profiles.username}`}
+              onClick={e => {
+                e.stopPropagation();
+              }}
+            >
+              <Avatar size="xl" className="select-none">
+                <AvatarImage
+                  className="pointer-events-none select-none"
+                  alt=""
+                  src={post.profiles.avatar}
+                />
+              </Avatar>
+            </Link>
 
             <Column className="h-full flex-1 gap-1 overflow-hidden">
               <Row className="gap-1 text-muted center-v">
@@ -71,9 +79,7 @@ export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
               <EmptyDivider />
 
               <PostButtonWrapper>
-                <PostButton color="blue-500" icon="message" isActive={false}>
-                  {post.reply_count}
-                </PostButton>
+                <PostButton icon="message" />
 
                 <LikeButton post={post} queryKey={queryKey} />
               </PostButtonWrapper>

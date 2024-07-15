@@ -26,6 +26,7 @@ export default async function HomePage() {
   return (
     <HydrationProvider state={dehydratedState}>
       <CreatePostForm />
+
       <Feed queryKey={postsQueryKey} queryKeys={[]} />
     </HydrationProvider>
   );

@@ -15,7 +15,7 @@ const avatar = tv({
       lg: 'h-[28px] w-[28px]',
       xl: 'h-[36px] w-[36px]',
 
-      '2xl': 'h-10 w-10'
+      '2xl': 'size-16'
     }
   },
 

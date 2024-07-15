@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   const supabase = await createClient();
 
   if (code) {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    const { error,data } = await supabase.auth.exchangeCodeForSession(code);
 
     // URL to redirect to after sign up process completes
     if (error) {

@@ -26,7 +26,8 @@ export const LoginForm = () => {
       provider,
 
       options: {
-        redirectTo: `${getBaseUrl()}/auth/callback`
+        redirectTo: `${getBaseUrl()}/auth/callback`,
+        
       }
     });
   };

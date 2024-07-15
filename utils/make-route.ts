@@ -5,8 +5,10 @@ import {
   useParams as useNextParams,
   useSearchParams as useNextSearchParams
 } from 'next/navigation';
+
 import queryString from 'query-string';
-import { Routes } from '@/lib/routes';
+
+import type { Routes } from '@/lib/routes';
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
   (p?: z.input<Params>, options?: { search?: z.input<Search> }): string;

@@ -15,6 +15,8 @@ import { PostDivider } from '@/components/post';
 import { UserAvatar } from '@/components/user-avatar';
 import { MagicTextArea } from '@/components/ui/input';
 import { Icons } from '@/components/icons';
+import { useEffect, useRef, useState } from 'react';
+import { IconButton } from '@/components/ui/icon-button';
 
 interface CreatePostFormProps {
   parentId?: string | null;
@@ -23,8 +25,35 @@ interface CreatePostFormProps {
 export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
   const userData = useUser();
 
+  const fileReader = useRef<FileReader>();
+
   const { mutate: createPostMutation } = useCreatePost();
   const { mutate: createReplyMutation } = useCreateReply();
+
+  const [imageAttachment, setImageAttachment] = useState<File | null>(null);
+  const [imageUrl, SetImageUrl] = useState('');
+
+  const fileAttachmentRef = useRef<HTMLInputElement>(null);
+
+  const isReply = !!parentId;
+
+  useEffect(() => {
+    fileReader.current = new FileReader();
+
+    const fileUploadCallback = () => {
+      if (fileReader.current && fileReader.current.result) {
+        SetImageUrl(fileReader.current.result as string);
+      }
+    };
+
+    fileReader.current.onloadend = fileUploadCallback;
+
+    return () => {
+      if (fileReader.current) {
+        fileReader.current.onloadend = null;
+      }
+    };
+  }, []);
 
   if (!userData) return;
 
@@ -35,7 +64,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
 
     const userId = profile.id;
 
-    if (parentId) {
+    if (isReply) {
       createReplyMutation({
         id: uuid(),
         author_id: userId,
@@ -64,12 +93,67 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
     }
   };
 
+  const handleFormSubmission = (e: React.FormEvent<HTMLFormElement>) => {
+    const target = e.target;
+
+    const fileAttachmentElement = fileAttachmentRef.current;
+    if (!target || !fileAttachmentElement) return;
+
+    // const form = new FormData(target as as HTMLFormElement | null);
+  };
+
+  const attachmentButtonClick = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    const fileAttachmentElement = fileAttachmentRef.current;
+
+    if (!fileAttachmentElement) return;
+
+    fileAttachmentElement.click();
+  };
+
+  const addAttachment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const { files } = e.currentTarget;
+
+    if (files) {
+      // const messageContent = inputRef.current?.textContent as string | undefined;
+
+      const fileToUpload = files[0];
+
+      // 1 MB
+      const maxUploadSize = 1_000_000;
+
+      if (fileToUpload.size <= maxUploadSize && fileReader.current) {
+        fileReader.current.readAsDataURL(fileToUpload);
+
+        setImageAttachment(fileToUpload);
+      }
+    }
+
+    // @ts-expect-error - resets file input so user can select same file multiple times
+    e.target.value = null;
+  };
+
+  const removeAttachment = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    setImageAttachment(null);
+    SetImageUrl('');
+  };
+
   return (
     <Column className="w-full">
       <Row className="relative w-full gap-4 border-y px-6 py-4">
         <UserAvatar avatar={profile.avatar} size="xl" />
 
-        <form id="post-form" name="post-form" className="relative flex-1">
+        <form
+          onSubmit={handleFormSubmission}
+          id="post-form"
+          name="post-form"
+          className="relative flex-1"
+        >
           <Column className="relative w-full flex-1 gap-2">
             <div className="relative w-full flex-1">
               <MagicTextArea
@@ -83,14 +167,46 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
             </div>
 
             <Row className="justify-between center-v">
-              <Icons.attachment className="size-5 text-muted" />
+              {/* <button
+                onClick={attachmentButtonClick}
+                className="flex size-7 items-center justify-center rounded-full transition-all hover:bg-accent active:scale-75"
+              >
+                <Icons.attachment className="size-5 text-muted" />
+              </button> */}
 
               <div className="">
                 <Button color="primary" type="submit" size="sm">
-                  Post
+                  {isReply ? 'Reply' : 'Post'}
                 </Button>
               </div>
             </Row>
+
+            <input
+              ref={fileAttachmentRef}
+              multiple={false}
+              accept="image/*,video/*"
+              type="file"
+              onChange={addAttachment}
+              className="hidden"
+            ></input>
+
+            {imageAttachment?.type.includes('image') && (
+              <div className="relative flex">
+                <img
+                  alt=""
+                  className="h-96 w-full animate-scale-in rounded-xl object-cover"
+                  src={imageUrl as string}
+                />
+
+                <IconButton
+                  size="xs"
+                  onClick={removeAttachment}
+                  className="absolute left-2 top-2 rounded-full bg-background/50"
+                >
+                  <Icons.close className="text-primary" />
+                </IconButton>
+              </div>
+            )}
           </Column>
         </form>
       </Row>

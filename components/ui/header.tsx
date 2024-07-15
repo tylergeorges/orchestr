@@ -9,13 +9,13 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <header
-        className={cn('container sticky top-0 z-10 w-full bg-background px-6 py-5')}
+        className={cn('container sticky top-0 z-10 flex w-full bg-background px-6 py-5')}
         ref={ref}
         {...props}
       >
         <Row
           className={cn(
-            'mx-auto h-[58px] w-full items-center gap-4 bg-background p-3 text-center',
+            'relative mx-auto h-[58px] w-full items-center gap-4 bg-background p-3 text-center',
             className
           )}
         >

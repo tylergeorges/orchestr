@@ -60,6 +60,8 @@ export const LikeButton = ({ post, queryKey }: PostLikeButtonProps) => {
   const likePost = (e: React.SyntheticEvent) => {
     e.stopPropagation();
 
+    if (!user) return;
+
     const likeData: Partial<Likes> & { post_id: string } = {
       post_id: post.id,
       user_id: user.id
@@ -138,8 +140,8 @@ interface PostButtonProps {
   className?: string;
   onClick?: (e: React.SyntheticEvent) => void;
   icon: keyof typeof Icons;
-  color: string;
-  isActive: boolean;
+  color?: string;
+  isActive?: boolean;
 }
 
 export const PostButton = ({
@@ -147,7 +149,7 @@ export const PostButton = ({
   icon,
   onClick,
   className,
-  color,
+  color = 'blue-500',
   isActive
 }: WithChildren<PostButtonProps>) => {
   const Icon = Icons[icon];
@@ -163,7 +165,7 @@ export const PostButton = ({
       onClick={onClick}
     >
       <Icon
-        className={cn('size-5 transition-transform active:scale-75', isActive && `fill-${color}`)}
+        className={cn('size-5 transition-transform active:scale-90', isActive && `fill-${color}`)}
       />
 
       <span className="select-none">

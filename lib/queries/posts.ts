@@ -8,7 +8,8 @@ import { createQueryBuilder } from '@/lib/quardian/create-query-builder';
 function createPostsQuery(client: TypedSupabaseClient) {
   return client
     .from('posts_with_meta')
-    .select('*, profiles ( id, username, display_name, created_at, avatar )');
+    .select('*, profiles!inner(id,username,display_name,created_at,avatar)');
+  // .select('*, profiles ( id, username, display_name, created_at, avatar )');
 }
 
 export async function getPostsWithLikes(client: TypedSupabaseClient) {
@@ -22,6 +23,15 @@ export const postQueries = createQueryBuilder()
     const client = await createClient();
 
     const postsRes = await createPostsQuery(client).is('reply_to', null);
+
+    const posts = postsRes.data ?? [];
+
+    return posts;
+  })
+  .query('postsByAuthor', async (author: string) => {
+    const client = await createClient();
+
+    const postsRes = await createPostsQuery(client).eq('profiles.username', author);
 
     const posts = postsRes.data ?? [];
 

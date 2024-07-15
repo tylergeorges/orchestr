@@ -5,11 +5,11 @@ import { User } from '@supabase/supabase-js';
 import { useMemo } from 'react';
 import { createContext, useContextSelector } from 'use-context-selector';
 
-const AuthContext = createContext<{ profile: Profiles; user: User } | null>(null);
+const AuthContext = createContext<{ profile?: Profiles | null; user?: User | null } | null>(null);
 
 interface AuthProviderProps {
-  user: User;
-  profile: Profiles;
+  user?: User | null;
+  profile?: Profiles | null;
 }
 
 export const AuthProvider = ({ children, user, profile }: WithChildren<AuthProviderProps>) => {

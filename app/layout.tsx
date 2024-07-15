@@ -25,12 +25,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className="relative h-full w-full" lang="en" suppressHydrationWarning>
+    <html className="h-full" lang="en" suppressHydrationWarning>
       <head />
 
       <body
         className={cn(
-          'relative flex h-full w-full flex-1 flex-col overflow-hidden bg-background font-sans text-foreground antialiased',
+          'relative flex bg-background font-sans text-foreground antialiased vertical',
           fontMono.variable,
           fontSans.variable
         )}
@@ -38,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ReactQueryClientProvider>
           <ModalRenderer />
           <Toaster
+            richColors
             toastOptions={{
               classNames: {
                 toast: 'flex items-center rounded-md border-none text-primary',
@@ -57,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <NavHeader />
 
-          <main className="w-full flex-1 overflow-auto">{children}</main>
+          <main className="relative h-full flex-1">{children}</main>
           <NavMobileFooter />
         </ReactQueryClientProvider>
       </body>
