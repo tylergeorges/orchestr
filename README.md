@@ -18,7 +18,7 @@
 This project offers a way to create, interact and view posts, emulating the core functionalities of Twitter with a modern tech stack.
 
  <br />
-    <br />
+ <br />
     <a href="https://orchestrr.vercel.app/">View Demo</a>
       .
     <a href="https://github.com/tylergeorges/orchestr/issues">Report Bug</a>
@@ -28,7 +28,9 @@ This project offers a way to create, interact and view posts, emulating the core
 
 <br>
 <hr>
-<div>
+</div>
+
+<br>
 
 ### Built With
 
