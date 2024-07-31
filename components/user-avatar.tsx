@@ -16,7 +16,7 @@ export const UserAvatar = ({ avatar, size }: UserAvatarProps) => {
     );
   }
 
-  if (!user) return null;
+  if (!user || !user?.profile) return null;
 
   return (
     <Avatar size={size}>

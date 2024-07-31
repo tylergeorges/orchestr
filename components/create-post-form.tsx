@@ -17,6 +17,9 @@ import { MagicTextArea } from '@/components/ui/input';
 import { Icons } from '@/components/icons';
 import { useEffect, useRef, useState } from 'react';
 import { IconButton } from '@/components/ui/icon-button';
+import { getUser } from '@/utils/get-user';
+import { useRouter } from 'next/router';
+import { toast } from 'sonner';
 
 interface CreatePostFormProps {
   parentId?: string | null;
@@ -27,6 +30,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
 
   const fileReader = useRef<FileReader>();
 
+  const router = useRouter();
   const { mutate: createPostMutation } = useCreatePost();
   const { mutate: createReplyMutation } = useCreateReply();
 
@@ -59,10 +63,24 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
 
   const { profile } = userData;
 
-  const createPost = (text: string) => {
+  const createPost = async (text: string) => {
     if (!text || !text.trim()) return;
 
-    const userId = profile.id;
+    const { data, error } = await getUser();
+
+    if (!data || error) {
+      if (error) {
+        toast.error(error.message);
+      }
+
+      router.push('/');
+
+      return;
+    }
+
+    const { user } = data;
+
+    const userId = user.id;
 
     if (isReply) {
       createReplyMutation({
@@ -98,18 +116,6 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
 
     const fileAttachmentElement = fileAttachmentRef.current;
     if (!target || !fileAttachmentElement) return;
-
-    // const form = new FormData(target as as HTMLFormElement | null);
-  };
-
-  const attachmentButtonClick = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    const fileAttachmentElement = fileAttachmentRef.current;
-
-    if (!fileAttachmentElement) return;
-
-    fileAttachmentElement.click();
   };
 
   const addAttachment = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,8 +124,6 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
     const { files } = e.currentTarget;
 
     if (files) {
-      // const messageContent = inputRef.current?.textContent as string | undefined;
-
       const fileToUpload = files[0];
 
       // 1 MB
@@ -142,6 +146,12 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
     setImageAttachment(null);
     SetImageUrl('');
   };
+
+  if (!profile) {
+    router.push('/');
+
+    return null;
+  }
 
   return (
     <Column className="w-full">
@@ -167,13 +177,6 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
             </div>
 
             <Row className="justify-between center-v">
-              {/* <button
-                onClick={attachmentButtonClick}
-                className="flex size-7 items-center justify-center rounded-full transition-all hover:bg-accent active:scale-75"
-              >
-                <Icons.attachment className="size-5 text-muted" />
-              </button> */}
-
               <div className="">
                 <Button color="primary" type="submit" size="sm">
                   {isReply ? 'Reply' : 'Post'}

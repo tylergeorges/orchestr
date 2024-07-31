@@ -8,7 +8,7 @@ import {
 
 import queryString from 'query-string';
 
-import type { Routes } from '@/lib/routes';
+import { Routes } from '@/lib/routes';
 
 type RouteBuilder<Params extends z.ZodSchema, Search extends z.ZodSchema> = {
   (p?: z.input<Params>, options?: { search?: z.input<Search> }): string;
