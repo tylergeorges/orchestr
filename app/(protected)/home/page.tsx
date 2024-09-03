@@ -1,16 +1,17 @@
 'use server';
 
-import { dehydrate } from '@tanstack/react-query';
+import { QueryClient, dehydrate } from '@tanstack/react-query';
 
 import { postQueries } from '@/lib/queries/posts';
-import { getQueryClient } from '@/lib/get-query-client';
 
 import { CreatePostForm } from '@/components/create-post-form';
 import { Feed } from '@/components/feed';
 import { HydrationProvider } from '@/components/providers/hydration-provider';
 
 export default async function HomePage() {
-  const queryClient = getQueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { refetchOnWindowFocus: false } }
+  });
 
   const queries = await postQueries();
 

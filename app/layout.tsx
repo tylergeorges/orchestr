@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <body
         className={cn(
-          'relative flex bg-background font-sans text-foreground antialiased vertical',
+          'relative flex size-full bg-background font-sans text-foreground antialiased vertical',
           fontMono.variable,
           fontSans.variable
         )}
@@ -58,7 +58,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           <NavHeader />
 
-          <main className="relative h-full flex-1">{children}</main>
+          {children}
+
           <NavMobileFooter />
         </ReactQueryClientProvider>
       </body>

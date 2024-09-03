@@ -1,12 +1,16 @@
 'use client';
 
 import { v4 as uuid } from 'uuid';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
 
 import { generateTimestamp } from '@/utils/generate-timestamp';
 
 import { useCreateReply } from '@/hooks/use-create-reply';
 import { useCreatePost } from '@/hooks/use-create-post';
 import { useUser } from '@/components/providers/auth-provider';
+import { getUser } from '@/utils/get-user';
 
 import { Button } from '@/components/ui/button';
 import { Column } from '@/components/column';
@@ -15,11 +19,7 @@ import { PostDivider } from '@/components/post';
 import { UserAvatar } from '@/components/user-avatar';
 import { MagicTextArea } from '@/components/ui/input';
 import { Icons } from '@/components/icons';
-import { useEffect, useRef, useState } from 'react';
 import { IconButton } from '@/components/ui/icon-button';
-import { getUser } from '@/utils/get-user';
-import { useRouter } from 'next/router';
-import { toast } from 'sonner';
 
 interface CreatePostFormProps {
   parentId?: string | null;
@@ -196,7 +196,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
             {imageAttachment?.type.includes('image') && (
               <div className="relative flex">
                 <img
-                  alt=""
+                  alt="Post Attachment"
                   className="h-96 w-full animate-scale-in rounded-xl object-cover"
                   src={imageUrl as string}
                 />
