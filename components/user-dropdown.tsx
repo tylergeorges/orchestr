@@ -32,9 +32,9 @@ export const UserDropdown = ({ profile }: UserDropdownProps) => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger>
-        <UserAvatar size="lg" avatar={profile?.avatar} />
+        <UserAvatar size="xl" avatar={profile?.avatar} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent

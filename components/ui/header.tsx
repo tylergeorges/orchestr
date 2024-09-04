@@ -9,7 +9,7 @@ export const Header = forwardRef<HTMLElement, HeaderProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <header
-        className={cn('container sticky top-0 z-10 flex w-full bg-background px-6 py-5')}
+        className={cn('relative horizontal top-0 z-10 flex  bg-background px-6 py-5')}
         ref={ref}
         {...props}
       >

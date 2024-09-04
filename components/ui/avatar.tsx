@@ -12,8 +12,8 @@ const avatar = tv({
       xs: 'h-2 w-2',
       sm: 'h-3 w-3',
       md: 'h-4 w-4',
-      lg: 'h-[28px] w-[28px]',
-      xl: 'h-[36px] w-[36px]',
+      lg: 'size-7',
+      xl: 'size-10',
 
       '2xl': 'size-16'
     }
@@ -30,7 +30,7 @@ interface AvatarProps extends React.ComponentProps<'div'>, AvatarVariants {}
 
 export const Avatar = forwardRef<HTMLDivElement, WithChildren<AvatarProps>>(
   ({ className, children, size, ...props }, ref) => (
-    <div {...props} className={cn(avatar({ size }), className)} ref={ref}>
+    <div {...props} className={avatar({ size, className })} ref={ref}>
       {children}
     </div>
   )

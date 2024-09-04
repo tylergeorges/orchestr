@@ -9,9 +9,6 @@ import { postQueries } from '@/lib/queries/posts';
 import { HydrationProvider } from '@/components/providers/hydration-provider';
 import { ExpandedPost } from '@/components/ui/expanded-post';
 import { CreatePostForm } from '@/components/create-post-form';
-import { PostDivider } from '@/components/post';
-import { Column } from '@/components/column';
-import { BackButton } from '@/components/back-button';
 import { Feed } from '@/components/feed';
 
 interface PostPostProps {
@@ -41,12 +38,6 @@ export default async function PostPage({ params }: PostPostProps) {
 
   return (
     <HydrationProvider state={dehydratedState}>
-      <Column className="relative w-full">
-        <BackButton />
-
-        <PostDivider />
-      </Column>
-
       <ExpandedPost post={post} queryKey={'postById'} />
 
       <CreatePostForm parentId={postId} />

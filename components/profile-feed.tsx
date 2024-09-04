@@ -1,10 +1,11 @@
 'use client';
 
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { usePostsQuery } from '@/hooks/use-posts';
 import type { PostsWithLikes } from '@/lib/types';
 import type { PostsWithMeta } from '@/lib/types/supabase';
+import { useProfilePostsQuery } from '@/hooks/use-profile-posts-query';
 
 import {
   EmptyDivider,
@@ -23,17 +24,13 @@ import { Row } from '@/components/row';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Link } from '@/components/ui/link';
 import { Icons } from '@/components/icons';
-import { cn } from '@/utils/cn';
 
-type PostsQueryType = Parameters<typeof usePostsQuery>;
-
-interface FeedProps {
-  queryKey: PostsQueryType[0];
-  queryKeys: PostsQueryType[1];
+interface ProfileFeedProps {
+  author: string;
 }
 
-export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
-  const { data, error } = usePostsQuery(queryKey, queryKeys);
+export const ProfileFeed = ({ author }: ProfileFeedProps) => {
+  const { data, error } = useSuspenseQuery(useProfilePostsQuery(author));
 
   if (error) {
     toast.error(error.message);
@@ -44,7 +41,7 @@ export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
   const posts = (data as Defined<PostsWithMeta & PostsWithLikes>[]) ?? [];
 
   return (
-    <Column className="relative w-full flex-1">
+    <Column className="size-full flex-1 ">
       {posts.map(post => (
         <Post post={post} key={post.id}>
           <Row className="h-full flex-1 gap-4 p-6">
@@ -81,10 +78,8 @@ export const Feed = ({ queryKey, queryKeys }: FeedProps) => {
               <EmptyDivider />
 
               <PostButtonWrapper>
-              
-
                 <div className="flex-1">
-                  <LikeButton post={post} queryKey={queryKey} />
+                  <LikeButton post={post} queryKey={author} />
                 </div>
 
                 <div className="flex-1">

@@ -75,8 +75,19 @@ export const LikeButton = ({ post, queryKey }: PostLikeButtonProps) => {
   };
 
   return (
-    <PostButton color="destructive" icon="heart" isActive={post.is_liked} onClick={likePost}>
-      {post.like_count}
+    <PostButton
+      className={cn(post.is_liked ? `text-destructive` : `text-muted hover:text-destructive`)}
+      onClick={likePost}
+    >
+      <Icons.heart
+        className={cn(
+          'size-5',
+          post.is_liked
+            ? `fill-destructive text-destructive`
+            : `fill-none text-muted hover:text-destructive`
+        )}
+      />
+      {post.like_count > 0 ? post.like_count : null}
     </PostButton>
   );
 };
@@ -139,38 +150,19 @@ export const PostContent = ({ children, className, ...props }: PostBaseProps) =>
 interface PostButtonProps {
   className?: string;
   onClick?: (e: React.SyntheticEvent) => void;
-  icon: keyof typeof Icons;
-  color?: string;
-  isActive?: boolean;
 }
 
-export const PostButton = ({
-  children,
-  icon,
-  onClick,
-  className,
-  color = 'blue-500',
-  isActive
-}: WithChildren<PostButtonProps>) => {
-  const Icon = Icons[icon];
-
+export const PostButton = ({ children, onClick, className }: WithChildren<PostButtonProps>) => {
   return (
     <button
       className={cn(
-        'items-center justify-center gap-1 text-sm text-muted horizontal',
-        'transition-colors',
-        className,
-        isActive ? `fill-${color} text-${color}` : `fill-none text-muted hover:text-${color}`
+        'items-center justify-center gap-1 text-muted horizontal',
+        'text- transition-colors',
+        className
       )}
       onClick={onClick}
     >
-      <Icon
-        className={cn('size-5 transition-transform active:scale-90', isActive && `fill-${color}`)}
-      />
-
-      <span className="select-none">
-        {children && typeof children === 'number' ? children > 0 && children : null}
-      </span>
+      {children}
     </button>
   );
 };

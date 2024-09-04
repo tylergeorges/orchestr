@@ -155,7 +155,7 @@ export const CreatePostForm = ({ parentId = null }: CreatePostFormProps) => {
 
   return (
     <Column className="w-full">
-      <Row className="relative w-full gap-4 border-y px-6 py-4">
+      <Row className="relative w-full gap-4  px-6 py-4">
         <UserAvatar avatar={profile.avatar} size="xl" />
 
         <form

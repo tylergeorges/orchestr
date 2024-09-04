@@ -33,22 +33,6 @@ export const NavHeader = async () => {
         <div className="flex flex-1 items-center justify-end gap-2">
           {user && profile ? (
             <>
-              {/* <span className="flex-1 items-center text-sm font-medium capitalize text-primary horizontal center-h to-md:hidden">
-                <CurrentPath />
-              </span> */}
-
-              {/* <NavIcon
-                icon="inbox"
-                href="/messages"
-                className="size-5 cursor-pointer text-muted transition hover:text-muted-foreground to-md:hidden"
-              />
-
-              <NavIcon
-                icon="bell"
-                href="/activity"
-                className="size-5 cursor-pointer text-muted transition hover:text-muted-foreground to-md:hidden"
-              /> */}
-
               <UserDropdown profile={profile} />
             </>
           ) : (

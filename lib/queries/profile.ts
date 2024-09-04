@@ -13,19 +13,15 @@ export const getProfileById = cache((client: TypedSupabaseClient, userId: string
     .single();
 });
 
-export const getProfileByUsername = cache(async (username: string) => {
-  if (!username || !username.trim()) return;
-
+export const getProfileByUsername = async (username: string) => {
   const client = await createClient();
 
-  const res = await client
+  return client
     .from('profiles')
     .select('username, display_name, created_at, avatar, id, email')
     .eq('username', username)
     .single();
-
-  return res;
-});
+};
 
 export const getCurrentProfile = cache(async (userId?: string) => {
   if (!userId) return;

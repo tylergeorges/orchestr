@@ -56,11 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}
           />
 
-          <NavHeader />
+          <div className="relative  flex-1 vertical">
+            <NavHeader />
 
-          {children}
+            {children}
 
-          <NavMobileFooter />
+            <NavMobileFooter />
+          </div>
         </ReactQueryClientProvider>
       </body>
     </html>

@@ -9,8 +9,7 @@ import {
   PostButtonWrapper,
   PostContent,
   PostCreatedAt,
-  PostHeading,
-  PostSubHeading
+  PostHeading
 } from '@/components/post';
 import { Column } from '@/components/column';
 import { Row } from '@/components/row';
@@ -26,41 +25,39 @@ interface ExpandedPostProps {
 export const ExpandedPost = ({ post, queryKey }: ExpandedPostProps) => {
   return (
     <Post post={post} key={post.id}>
-      <Row className="h-full flex-1 gap-4 p-6">
-        <Avatar size="xl" className="select-none">
-          <AvatarImage
-            className="pointer-events-none select-none"
-            alt=""
-            src={post.profiles.avatar}
-          />
-        </Avatar>
+      <Column className="flex-1 gap-4 px-4 pb-4 md:p-0">
+        <Row className="h-full flex-1 gap-4 pb-4 pt-2">
+          <Avatar size="xl" className="select-none">
+            <AvatarImage
+              className="pointer-events-none select-none"
+              alt=""
+              src={post.profiles.avatar}
+            />
+          </Avatar>
 
-        <Column className="h-full flex-1 gap-4 overflow-hidden">
-          <Row className="gap-1 text-muted center-v">
+          <Column className="text-muted center-v">
             <PostHeading>{post.profiles.display_name}</PostHeading>
 
-            <EmptyDivider className="relative bottom-[1px] mr-1" />
-
-            <PostSubHeading>@{post.profiles.username}</PostSubHeading>
-
-            <PostSubHeading>·</PostSubHeading>
-
             <PostCreatedAt post={post} />
-          </Row>
-
-          <Column className="">
-            <PostContent className="line-clamp-[10]">{post.content}</PostContent>
-
-            <EmptyDivider />
-
-            <PostButtonWrapper className="mt-2">
-              <LikeButton post={post} queryKey={queryKey} />
-            </PostButtonWrapper>
           </Column>
-        </Column>
-      </Row>
+        </Row>
 
-      <EmptyDivider className="absolute bottom-0 right-0 h-[1px] w-full bg-border" />
+        <Column className="h-full flex-1 gap-4 overflow-hidden">
+          <PostContent className="line-clamp-[10]">{post.content}</PostContent>
+
+          <Row className="justify-start center-h">
+            <div className="flex-1 horizontal center">
+              <PostButtonWrapper className="m-0 size-9 px-1">
+                <LikeButton post={post} queryKey={queryKey} />
+              </PostButtonWrapper>
+            </div>
+          </Row>
+        </Column>
+
+        <div className="w-full">
+          <EmptyDivider className="absolute bottom-0 right-0 h-[1px] w-full bg-border" />
+        </div>
+      </Column>
     </Post>
   );
 };
